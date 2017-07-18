@@ -1,15 +1,15 @@
 use "collections"
 
-interface SdlFlag
+interface SDLFlag
 	fun value(): U32
-	fun op_or(other: SdlFlag val): SdlFlag val =>
-		recover UndefinedSdlFlag(this.value() or other.value()) end
-	fun op_and(other: SdlFlag val): SdlFlag val =>
-		recover UndefinedSdlFlag(this.value() and other.value()) end
-	fun op_xor(other: SdlFlag val): SdlFlag val =>
-		recover UndefinedSdlFlag(this.value() xor other.value()) end
+	fun op_or(other: SDLFlag val): SDLFlag val =>
+		recover UndefinedSDLFlag(this.value() or other.value()) end
+	fun op_and(other: SDLFlag val): SDLFlag val =>
+		recover UndefinedSDLFlag(this.value() and other.value()) end
+	fun op_xor(other: SDLFlag val): SDLFlag val =>
+		recover UndefinedSDLFlag(this.value() xor other.value()) end
 
-class UndefinedSdlFlag is SdlFlag
+class UndefinedSDLFlag is SDLFlag
 	var _val: U32
 	new create(value': U32) => _val = value'
 	fun value(): U32 => _val
@@ -17,19 +17,19 @@ class UndefinedSdlFlag is SdlFlag
 /*
 	Initialisation flags
 */
-primitive TIMER is SdlFlag
+primitive TIMER is SDLFlag
 	fun value(): U32 => 0x00000001
-primitive AUDIO is SdlFlag
+primitive AUDIO is SDLFlag
 	fun value(): U32 => 0x00000010
-primitive VIDEO is SdlFlag
+primitive VIDEO is SDLFlag
 	fun value(): U32 => 0x00000020
-primitive JOYSTICK is SdlFlag
+primitive JOYSTICK is SDLFlag
 	fun value(): U32 => 0x00000200
-primitive HAPTIC is SdlFlag
+primitive HAPTIC is SDLFlag
 	fun value(): U32 => 0x00001000
-primitive GAMECONTROLLER is SdlFlag
+primitive GAMECONTROLLER is SDLFlag
 	fun value(): U32 => 0x00002000
-primitive EVENTS is SdlFlag
+primitive EVENTS is SDLFlag
 	fun value(): U32 => 0x00004000
-primitive NOPARACHUTE is SdlFlag
+primitive NOPARACHUTE is SDLFlag
 	fun value(): U32 => 0x00100000

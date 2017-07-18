@@ -2,49 +2,49 @@ use "collections"
 use "strings"
 use "lib:SDL2"
 
-primitive SDLWin
-type SdlWindow is Pointer[SDLWin]
+primitive _Window
+type SDLWindow is Pointer[_Window]
 
 /*
 	Window flags
 */
-primitive WFULLSCREEN is SdlFlag
+primitive WFULLSCREEN is SDLFlag
 	fun value(): U32 => 0x00000001
-primitive WOPENGL is SdlFlag
+primitive WOPENGL is SDLFlag
 	fun value(): U32 => 0x00000002
-primitive WSHOWN is SdlFlag
+primitive WSHOWN is SDLFlag
 	fun value(): U32 => 0x00000004
-primitive WHIDDEN is SdlFlag
+primitive WHIDDEN is SDLFlag
 	fun value(): U32 => 0x00000008
-primitive WBORDERLESS is SdlFlag
+primitive WBORDERLESS is SDLFlag
 	fun value(): U32 => 0x00000010
-primitive WRESIZABLE is SdlFlag
+primitive WRESIZABLE is SDLFlag
 	fun value(): U32 => 0x00000020
-primitive WMINIMIZED is SdlFlag
+primitive WMINIMIZED is SDLFlag
 	fun value(): U32 => 0x00000040
-primitive WMAXIMIZED is SdlFlag
+primitive WMAXIMIZED is SDLFlag
 	fun value(): U32 => 0x00000080
-primitive WINPUTGRABBED is SdlFlag
+primitive WINPUTGRABBED is SDLFlag
 	fun value(): U32 => 0x00000100
-primitive WINPUTFOCUS is SdlFlag
+primitive WINPUTFOCUS is SDLFlag
 	fun value(): U32 => 0x00000200
-primitive WMOUSEFOCUS is SdlFlag
+primitive WMOUSEFOCUS is SDLFlag
 	fun value(): U32 => 0x00000400
-primitive WFULLSCREENDESKTOP is SdlFlag
+primitive WFULLSCREENDESKTOP is SDLFlag
 	fun value(): U32 => WFULLSCREEN.value() or 0x00001000
-primitive WFOREIGN is SdlFlag
+primitive WFOREIGN is SDLFlag
 	fun value(): U32 => 0x00000800
-primitive WALLOWHIGHDPI is SdlFlag
+primitive WALLOWHIGHDPI is SDLFlag
 	fun value(): U32 => 0x00002000
-primitive WMOUSECAPTURE is SdlFlag
+primitive WMOUSECAPTURE is SDLFlag
 	fun value(): U32 => 0x00004000
-primitive WALWAYSONTOP is SdlFlag
+primitive WALWAYSONTOP is SDLFlag
 	fun value(): U32 => 0x00008000
-primitive WSKIPTASKBAR is SdlFlag
+primitive WSKIPTASKBAR is SDLFlag
 	fun value(): U32 => 0x00010000
-primitive WUTILITY is SdlFlag
+primitive WUTILITY is SDLFlag
 	fun value(): U32 => 0x00020000
-primitive WTOOLTIP is SdlFlag
+primitive WTOOLTIP is SDLFlag
 	fun value(): U32 => 0x00040000
-primitive WPOPUPMENU is SdlFlag
+primitive WPOPUPMENU is SDLFlag
 	fun value(): U32 => 0x00080000
