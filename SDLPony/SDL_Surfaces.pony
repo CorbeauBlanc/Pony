@@ -7,6 +7,7 @@ struct SDLRect
 	var y: I64 = 0
 	var w: I64 = 0
 	var h: I64 = 0
+type SDLPtrRect is MaybePointer[SDLRect]
 
 primitive _BlitMap
 primitive _Surface

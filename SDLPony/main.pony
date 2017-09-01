@@ -3,7 +3,8 @@ use "strings"
 use "lib:SDL2"
 
 use @SDL_AllocFormat[SDLPixelFormat](pixel_format: U32)
-use @SDL_BlitSurface[I64](src: SDLSurface, srcrect: SDLRect, dst: SDLSurface, dstrect: SDLSurface)
+use @SDL_BlitSurface[I64](src: SDLSurface, srcrect: MaybePointer[SDLRect], dst: SDLSurface, dstrect: MaybePointer[SDLRect])
+use @SDL_CreateRenderer[SDLRenderer](window: SDLWindow, index: I64, flags: U32)
 use @SDL_CreateRGBSurface[SDLSurface](flags: U32, width: I64, height: I64, depth: I64,
 																			rMask: U32, gMask: U32, bMask: U32, aMask: U32)
 use @SDL_CreateWindow[SDLWindow]	(title: Pointer[U8] tag, x: I64, y: I64, w: I64, h: I64, flags: U32)
@@ -15,6 +16,7 @@ use @SDL_FreeSurface[None](surface: SDLSurface)
 use @SDL_GetClipRect[None](surface: SDLSurface, rect: SDLRect)
 use @SDL_GetError[Pointer[U8]]()
 use @SDL_GetWindowPixelFormat[U32](window: SDLWindow)
+use @SDL_GetWindowSurface[SDLSurface](window: SDLWindow)
 use @SDL_HideWindow[None](window: SDLWindow)
 use @SDL_LoadBMP[SDLSurface](file: Pointer[U8] tag)
 use @SDL_LockSurface[I64](surface: SDLSurface)
@@ -42,8 +44,11 @@ actor Main
 	fun sdl_AllocFormat(pixel_format: U32): SDLPixelFormat =>
 		@SDL_AllocFormat(pixel_format)
 
-	fun sdl_BlitSurface(src: SDLSurface, srcrect: SDLRect, dst: SDLSurface, dstrect: SDLSurface): I64 =>
+	fun sdl_BlitSurface(src: SDLSurface, srcrect: SDLPtrRect, dst: SDLSurface, dstrect: SDLPtrRect): I64 =>
 		@SDL_BlitSurface(src, srcrect, dst, dstrect)
+
+	fun sdl_CreateRenderer(window: SDLWindow, index: I64, flags: SDLFlag): SDLRenderer =>
+		@SDL_CreateRenderer(window, index, flags.value())
 
 	fun sdl_CreateRGBSurface(flags: SDLFlag val, width: I64, height: I64, depth: I64,
 												rMask: U32, gMask: U32, bMask: U32, aMask: U32): Pointer[_Surface] =>
@@ -72,6 +77,9 @@ actor Main
 
 	fun sdl_GetWindowPixelFormat(window: SDLWindow): U32 =>
 		@SDL_GetWindowPixelFormat(window)
+
+	fun sdl_GetWindowSurface(window: SDLWindow): SDLSurface =>
+		@SDL_GetWindowSurface(window)
 
 	fun sdl_HideWindow(window: SDLWindow) =>
 		@SDL_HideWindow(window)
@@ -147,6 +155,7 @@ actor Main
 		rect.w = 100
 		rect.h = 100
 		sdl_FillRect(surf, rect, sdl_MapRGB(sdl_AllocFormat(sdl_GetWindowPixelFormat(win)), 0, 0, 255))
+
 		sdl_Delay(1000)
 		sdl_DestroyWindow(win)
 		sdl_Quit()

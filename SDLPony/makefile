@@ -5,10 +5,13 @@ NAME=$(notdir $(CURDIR))
 
 .PHONY: all clean re
 
-all: $(NAME)
+$(NAME):
 	$(PC) $(PFLAGS)
 
+all: $(NAME)
+
 clean:
+	rm *.o
 	rm $(NAME)
 
 re: clean all
