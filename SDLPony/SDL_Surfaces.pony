@@ -3,7 +3,7 @@ use "lib:SDL2"
 
 primitive _Rect
 struct SDLRect
-	var x: I64 = 2
+	var x: I64 = 0
 	var y: I64 = 0
 	var w: I64 = 0
 	var h: I64 = 0

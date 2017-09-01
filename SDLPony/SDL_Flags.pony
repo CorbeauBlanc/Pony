@@ -17,6 +17,8 @@ class UdefSDLFlag is SDLFlag
 /*
 	Initialisation flags
 */
+primitive NULLFLAG is SDLFlag
+	fun value(): U32 => 0x00000000
 primitive TIMER is SDLFlag
 	fun value(): U32 => 0x00000001
 primitive AUDIO is SDLFlag
