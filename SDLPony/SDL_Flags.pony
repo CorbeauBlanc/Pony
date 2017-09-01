@@ -3,13 +3,13 @@ use "collections"
 interface SDLFlag
 	fun value(): U32
 	fun op_or(other: SDLFlag val): SDLFlag val =>
-		recover UndefinedSDLFlag(this.value() or other.value()) end
+		recover UdefSDLFlag(this.value() or other.value()) end
 	fun op_and(other: SDLFlag val): SDLFlag val =>
-		recover UndefinedSDLFlag(this.value() and other.value()) end
+		recover UdefSDLFlag(this.value() and other.value()) end
 	fun op_xor(other: SDLFlag val): SDLFlag val =>
-		recover UndefinedSDLFlag(this.value() xor other.value()) end
+		recover UdefSDLFlag(this.value() xor other.value()) end
 
-class UndefinedSDLFlag is SDLFlag
+class UdefSDLFlag is SDLFlag
 	var _val: U32
 	new create(value': U32) => _val = value'
 	fun value(): U32 => _val

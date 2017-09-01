@@ -10,10 +10,10 @@ struct SDLColor
 
 primitive _Palette
 struct SDLPalette
-	var ncolors: U64 = 0
+	var ncolors: I64 = 0
 	var colors: Pointer[_Color] = Pointer[_Color]
 	var version: U32 = 0
-	var refcount: U64 = 0
+	var refcount: I64 = 0
 
 primitive _PixelFormat
 struct SDLPixelFormat
@@ -33,5 +33,14 @@ struct SDLPixelFormat
 	var _gShift: U8 = 0
 	var _bShift: U8 = 0
 	var _aShift: U8 = 0
-	var _refcount: U64 = 0
+	var _refcount: I64 = 0
 	var _next: Pointer[_PixelFormat] = Pointer[_PixelFormat]
+
+primitive BLENDMODENONE is SDLFlag
+	fun value(): U32 => 0x00000000
+primitive BLENDMODEBLEND is SDLFlag
+	fun value(): U32 => 0x00000001
+primitive BLENDMODEADD is SDLFlag
+	fun value(): U32 => 0x00000002
+primitive BLENDMODEMOD is SDLFlag
+	fun value(): U32 => 0x00000004
