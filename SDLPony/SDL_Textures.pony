@@ -13,6 +13,14 @@ primitive RENDERERPRESENTVSYNC is SDLFlag
 primitive RENDERERTARGETTEXTURE is SDLFlag
 	fun value(): U32 => 0x00000008
 
+primitive FLIPNONE is SDLFlag
+	fun value(): U32 => 0x00000000
+primitive FLIPHORIZONTAL is SDLFlag
+	fun value(): U32 => 0x00000001
+primitive FLIPVERTICAL is SDLFlag
+	fun value(): U32 => 0x00000002
+
+
 primitive _Texture
 type SDLTexture is Pointer[_Texture]
 
