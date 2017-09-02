@@ -11,7 +11,11 @@ $(NAME):
 all: $(NAME)
 
 clean:
-	rm *.o
-	rm $(NAME)
+	@if [ -e *.o ]; then\
+		rm *.o;\
+	fi
+	@if [ -e $(NAME) ]; then\
+		rm $(NAME);\
+	fi
 
 re: clean all
