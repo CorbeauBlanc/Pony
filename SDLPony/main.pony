@@ -32,7 +32,7 @@ use @SDL_MaximizeWindow[None](window: SDLWindow)
 use @SDL_MinimizeWindow[None](window: SDLWindow)
 use @SDL_Quit[None]()
 use @SDL_RaiseWindow[None](window: SDLWindow)
-use @SDL_RenderCopy[I64](renderer: SDLRenderer, texture: SDLTexture,
+use @SDL_RenderCopy_d[I64](renderer: SDLRenderer, texture: SDLTexture,
 												rcrect: SDLPtrRect val, dstrect: SDLPtrRect)
 use @SDL_RenderCopyEx[I64](renderer: SDLRenderer, texture: SDLTexture,
 													srcrect: SDLPtrRect val, dstrect: SDLPtrRect val,
@@ -99,7 +99,7 @@ actor Main
 	fun sdl_FreeSurface(surface: SDLSurface) =>
 		@SDL_FreeSurface(surface)
 
-	fun sdl_GetError(): String box =>
+	fun sdl_GetError(): String val =>
 		recover String.from_cstring(@SDL_GetError()) end
 
 	fun sdl_GetWindowPixelFormat(window: SDLWindow): U32 =>
@@ -141,7 +141,7 @@ actor Main
 
 	fun sdl_RenderCopy(renderer: SDLRenderer, texture: SDLTexture,
 											srcrect: SDLPtrRect val, dstrect: SDLPtrRect): I64 =>
-		@SDL_RenderCopy(renderer, texture, srcrect, dstrect)
+		@SDL_RenderCopy_d(renderer, texture, srcrect, dstrect)
 
 	fun sdl_RenderCopyEx(renderer: SDLRenderer, texture: SDLTexture,
 											srcrect: SDLPtrRect val, dstrect: SDLPtrRect val, angle: F64 val,
@@ -199,13 +199,11 @@ actor Main
 		let win = sdl_CreateWindow("test", 0, 0, 500, 500, NULLFLAG)
 		let ren = sdl_CreateRenderer(win, -1, RENDERERACCELERATED)
 		var surf: SDLSurface = sdl_LoadBMP("pony_id.bmp")
-/*		var surf: SDLSurface = sdl_CreateRGBSurface(200, 200, 32, 0, 0, 0, 0)
-		sdl_FillRect(surf, SDLPtrRect.none(), 12)*/
 
 		var text = sdl_CreateTextureFromSurface(ren, surf)
+		let rect = SDLRect(200, 200, 200, 200)
 
-		sdl_RenderCopy(ren, text, recover SDLPtrRect.none() end, recover SDLPtrRect.none() end)
-		sdl_RenderPresent(ren)
+		sdl_RenderCopy(ren, text, recover SDLPtrRect.none() end, SDLPtrRect(rect)) != 0
 
 		sdl_Delay(1000)
 		sdl_DestroyWindow(win)
