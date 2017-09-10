@@ -16,9 +16,8 @@ struct SDLWindowEvent
 	var data2: I32 = 0
 
 struct SDLKeysym
-{
-	var scancode: SDLScancode: SDLScancode
-	var sym: SDLKeycode: SDLKeycode
+	var scancode: SDLScancode = 0
+	var sym: SDLKeycode = 0
 	var mod: U16 = 0
 	var unused: U32 = 0
 
@@ -47,40 +46,39 @@ struct SDLTextInputEvent
 	var text: Pointer[U8] = Pointer[U8]
 
 struct SDLMouseMotionEvent
-{
-	var evt_type: U32
-	var timestamp: U32
-	var windowID: U32
-	var which: U32
-	var state: U32
-	var x: I32
-	var y: I32
-	var xrel: I32
-	var yrel: I32
+	var evt_type: U32 = 0
+	var timestamp: U32 = 0
+	var windowID: U32 = 0
+	var which: U32 = 0
+	var state: U32 = 0
+	var x: I32 = 0
+	var y: I32 = 0
+	var xrel: I32 = 0
+	var yrel: I32 = 0
 
 struct SDLMouseButtonEvent
-	var evt_type: U32
-	var timestamp: U32
-	var windowID: U32
-	var which: U32
-	var button: U8
-	var state: U8
-	var clicks: U8
-	var padding1: U8
-	var x: I32
-	var y: I32
+	var evt_type: U32 = 0
+	var timestamp: U32 = 0
+	var windowID: U32 = 0
+	var which: U32 = 0
+	var button: U8 = 0
+	var state: U8 = 0
+	var clicks: U8 = 0
+	var padding1: U8 = 0
+	var x: I32 = 0
+	var y: I32 = 0
 
 struct SDLMouseWheelEvent
-	var type: U32
-	var timestamp: U32
-	var windowID: U32
-	var which: U32
-	var x: I32
-	var y: I32
-	var direction: U32
+	var evt_type: U32 = 0
+	var timestamp: U32 = 0
+	var windowID: U32 = 0
+	var which: U32 = 0
+	var x: I32 = 0
+	var y: I32 = 0
+	var direction: U32 = 0
 
 
 
 struct SDLEvent
-	type: U32 = 0
-	_common: SDLCommonEvent = SDLCommonEvent
+	var evt_type: U32 = 0
+	var _common: SDLCommonEvent = SDLCommonEvent
