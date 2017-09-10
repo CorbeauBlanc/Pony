@@ -1,6 +1,5 @@
 use "collections"
 use "strings"
-use "lib:SDL2"
 
 primitive _Window
 type SDLWindow is Pointer[_Window]

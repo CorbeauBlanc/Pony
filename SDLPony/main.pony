@@ -23,7 +23,7 @@ use @SDL_GetError[Pointer[U8]]()
 use @SDL_GetWindowPixelFormat[U32](window: SDLWindow)
 use @SDL_GetWindowSurface[SDLSurface](window: SDLWindow)
 use @SDL_HideWindow[None](window: SDLWindow)
-use @SDL_LoadBMP[SDLSurface](file: Pointer[U8] tag)
+use @SDL_LoadBMP_RW[SDLSurface](src: SDLRWops, freesrc: I64)
 use @SDL_LockSurface[I64](surface: SDLSurface)
 use @SDL_Init[I64](flags: U32)
 use @SDL_MapRGB[U32](format: SDLPixelFormat, r: U8, g: U8, b: U8)
@@ -38,6 +38,7 @@ use @SDL_RenderCopyEx[I64](renderer: SDLRenderer, texture: SDLTexture,
 													srcrect: SDLPtrRect val, dstrect: SDLPtrRect val,
 													angle: F64 val, center: SDLPtrPoint val, flip: U32)
 use @SDL_RenderPresent[None](renderer: SDLRenderer)
+use @SDL_RWFromFile[SDLRWops](file: Pointer[U8] tag, mode: Pointer[U8] tag)
 use @SDL_RestoreWindow[None](window: SDLWindow)
 use @SDL_SetClipRect[U8](surface: SDLSurface, rect: SDLRect)
 use @SDL_SetSurfaceAlphaMod[I64](surface: SDLSurface, alpha: U8)
@@ -64,9 +65,9 @@ actor Main
 	fun sdl_CreateRenderer(window: SDLWindow, index: I64, flags: SDLFlag val): SDLRenderer =>
 		@SDL_CreateRenderer(window, index, flags.value())
 
-	fun sdl_CreateRGBSurface(flags: SDLFlag val, width: I64, height: I64, depth: I64,
+	fun sdl_CreateRGBSurface(width: I64, height: I64, depth: I64,
 												rMask: U32, gMask: U32, bMask: U32, aMask: U32): Pointer[_Surface] =>
-		@SDL_CreateRGBSurface(flags.value(), width, height, depth, rMask, gMask, bMask, aMask)
+		@SDL_CreateRGBSurface(0, width, height, depth, rMask, gMask, bMask, aMask)
 
 	fun sdl_CreateTexture(renderer: SDLRenderer, format: U32, access: U32, w: I64, h: I64): SDLTexture =>
 		@SDL_CreateTexture(renderer, format, access, w, h)
@@ -114,7 +115,8 @@ actor Main
 		@SDL_Init(flags.value())
 
 	fun sdl_LoadBMP(file: String): SDLSurface =>
-		@SDL_LoadBMP(file.cstring())
+		let mode: String = "rb"
+		@SDL_LoadBMP_RW(@SDL_RWFromFile(file.cstring(), mode.cstring()), 1)
 
 	fun sdl_LockSurface(surface: SDLSurface) =>
 		@SDL_LockSurface(surface)
@@ -197,11 +199,12 @@ actor Main
 		let win = sdl_CreateWindow("test", 0, 0, 500, 500, NULLFLAG)
 		let ren = sdl_CreateRenderer(win, -1, RENDERERACCELERATED)
 		var surf: SDLSurface = sdl_LoadBMP("pony_id.bmp")
+/*		var surf: SDLSurface = sdl_CreateRGBSurface(200, 200, 32, 0, 0, 0, 0)
+		sdl_FillRect(surf, SDLPtrRect.none(), 12)*/
 
 		var text = sdl_CreateTextureFromSurface(ren, surf)
 
-		var rect: SDLRect ref = SDLRect.create(0, 0, 200, 200)
-		sdl_RenderCopy(ren, text, recover SDLPtrRect.none() end, SDLPtrRect(rect))
+		sdl_RenderCopy(ren, text, recover SDLPtrRect.none() end, recover SDLPtrRect.none() end)
 		sdl_RenderPresent(ren)
 
 		sdl_Delay(1000)

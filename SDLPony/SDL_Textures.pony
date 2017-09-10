@@ -1,5 +1,4 @@
 use "collections"
-use "lib:SDL2"
 
 primitive _Renderer
 type SDLRenderer is Pointer[_Renderer]

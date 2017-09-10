@@ -1,5 +1,4 @@
 use "collections"
-use "lib:SDL2"
 
 primitive _SDLRect
 struct SDLRect
@@ -38,3 +37,6 @@ struct Surface
 	var refcount: I64 = 0
 
 type SDLSurface is Pointer[_Surface]
+
+primitive _SDLRWops
+type SDLRWops is Pointer[_SDLRWops]
