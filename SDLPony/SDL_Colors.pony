@@ -9,10 +9,10 @@ struct SDLColor
 
 primitive _Palette
 struct SDLPalette
-	var ncolors: I64 = 0
+	var ncolors: I32 = 0
 	var colors: Pointer[_Color] = Pointer[_Color]
 	var version: U32 = 0
-	var refcount: I64 = 0
+	var refcount: I32 = 0
 
 primitive _PixelFormat
 struct PixelFormat
@@ -32,7 +32,7 @@ struct PixelFormat
 	var _gShift: U8 = 0
 	var _bShift: U8 = 0
 	var _aShift: U8 = 0
-	var _refcount: I64 = 0
+	var _refcount: I32 = 0
 	var _next: Pointer[_PixelFormat] = Pointer[_PixelFormat]
 type SDLPixelFormat is Pointer[_PixelFormat]
 
