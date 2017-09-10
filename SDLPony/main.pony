@@ -2,210 +2,169 @@ use "collections"
 use "strings"
 use "lib:SDL2"
 
-use @SDL_AllocFormat[SDLPixelFormat](pixel_format: U32)
-use @SDL_BlitSurface[I32](src: SDLSurface, srcrect: SDLPtrRect,
-													dst: SDLSurface, dstrect: SDLPtrRect)
-use @SDL_CreateRenderer[SDLRenderer](window: SDLWindow, index: I32, flags: U32)
-use @SDL_CreateRGBSurface[SDLSurface](flags: U32, width: I32, height: I32, depth: I32,
-																			rMask: U32, gMask: U32, bMask: U32, aMask: U32)
-use @SDL_CreateTexture[SDLTexture](renderer: SDLRenderer, format: U32, access: U32, w: I32, h: I32)
-use @SDL_CreateTextureFromSurface[SDLTexture](renderer: SDLRenderer, surface: SDLSurface)
-use @SDL_CreateWindow[SDLWindow](title: Pointer[U8] tag, x: I32, y: I32, w: I32, h: I32, flags: U32)
 use @SDL_Delay[None](ms: U32)
-use @SDL_DestroyRenderer[None](renderer: SDLRenderer)
-use @SDL_DestroyTexture[None](texture: SDLTexture)
-use @SDL_DestroyWindow[None](window: SDLWindow)
-use @SDL_FillRect[I32](dst: SDLSurface, rect: SDLPtrRect, color: U32)
-use @SDL_FreeFormat[None](format: SDLPixelFormat)
-use @SDL_FreeSurface[None](surface: SDLSurface)
-use @SDL_GetClipRect[None](surface: SDLSurface, rect: SDLRect)
 use @SDL_GetError[Pointer[U8]]()
-use @SDL_GetWindowPixelFormat[U32](window: SDLWindow)
-use @SDL_GetWindowSurface[SDLSurface](window: SDLWindow)
-use @SDL_HideWindow[None](window: SDLWindow)
-use @SDL_LoadBMP_RW[SDLSurface](src: SDLRWops, freesrc: I32)
-use @SDL_LockSurface[I32](surface: SDLSurface)
-use @SDL_Init[I32](flags: U32)
-use @SDL_MapRGB[U32](format: SDLPixelFormat, r: U8, g: U8, b: U8)
-use @SDL_MapRGBA[U32](format: SDLPixelFormat, r: U8, g: U8, b: U8, a: U8)
-use @SDL_MaximizeWindow[None](window: SDLWindow)
-use @SDL_MinimizeWindow[None](window: SDLWindow)
+use @SDL_Init[I32](flags: U32 tag)
 use @SDL_Quit[None]()
-use @SDL_RaiseWindow[None](window: SDLWindow)
-use @SDL_RenderCopy[I32](renderer: SDLRenderer, texture: SDLTexture,
-												rcrect: SDLPtrRect val, dstrect: SDLPtrRect)
-use @SDL_RenderCopyEx[I32](renderer: SDLRenderer, texture: SDLTexture,
-													srcrect: SDLPtrRect val, dstrect: SDLPtrRect val,
-													angle: F64 val, center: SDLPtrPoint val, flip: U32)
-use @SDL_RenderPresent[None](renderer: SDLRenderer)
-use @SDL_RWFromFile[SDLRWops](file: Pointer[U8] tag, mode: Pointer[U8] tag)
-use @SDL_RestoreWindow[None](window: SDLWindow)
-use @SDL_SetClipRect[U8](surface: SDLSurface, rect: SDLRect)
-use @SDL_SetSurfaceAlphaMod[I32](surface: SDLSurface, alpha: U8)
-use @SDL_SetSurfaceBlendMode[I32](surface: SDLSurface, blendMode: U32)
-use @SDL_SetSurfaceColorMod[I32](surface: SDLSurface, r: U8, g: U8, b: U8)
-use @SDL_SetTextureAlphaMod[I32](texture: SDLTexture, alpha: U8)
-use @SDL_SetTextureBlendMode[I32](texture: SDLTexture, blendMode: U32)
-use @SDL_SetTextureColorMod[I32](texture: SDLTexture,r: U8, g: U8, b: U8)
-use @SDL_SetWindowFullscreen[I32](window: SDLWindow, flags: U32)
-use @SDL_SetWindowPosition[None](window: SDLWindow, x: I32, y: I32)
-use @SDL_SetWindowSize[None](window: SDLWindow, w: I32, h: I32)
-use @SDL_ShowWindow[None](window: SDLWindow)
-use @SDL_UnlockSurface[I32](surface: SDLSurface)
 
 
-actor Main
+primitive SDL
 
-	fun sdl_AllocFormat(pixel_format: U32): SDLPixelFormat =>
+	fun allocFormat(pixel_format: U32): SDLPixelFormat =>
 		@SDL_AllocFormat(pixel_format)
 
-	fun sdl_BlitSurface(src: SDLSurface, srcrect: SDLPtrRect, dst: SDLSurface, dstrect: SDLPtrRect): I32 =>
-		@SDL_BlitSurface(src, srcrect, dst, dstrect)
+	fun blitSurface(src: SDLSurface, srcrect: SDLPtrRect, dst: SDLSurface, dstrect: SDLPtrRect): I32 =>
+		@SDL_UpperBlit(src, srcrect, dst, dstrect)
 
-	fun sdl_CreateRenderer(window: SDLWindow, index: I32, flags: SDLFlag val): SDLRenderer =>
-		@SDL_CreateRenderer(window, index, flags.value())
+	fun createRenderer(window: SDLWindow, index: I32, flags: SDLFlag val): SDLRenderer =>
+		@SDL_CreateRenderer(window, index, flags())
 
-	fun sdl_CreateRGBSurface(width: I32, height: I32, depth: I32,
+	fun createRGBSurface(width: I32, height: I32, depth: I32,
 												rMask: U32, gMask: U32, bMask: U32, aMask: U32): Pointer[_Surface] =>
 		@SDL_CreateRGBSurface(0, width, height, depth, rMask, gMask, bMask, aMask)
 
-	fun sdl_CreateTexture(renderer: SDLRenderer, format: U32, access: U32, w: I32, h: I32): SDLTexture =>
+	fun createTexture(renderer: SDLRenderer, format: U32, access: U32, w: I32, h: I32): SDLTexture =>
 		@SDL_CreateTexture(renderer, format, access, w, h)
 
-	fun sdl_CreateTextureFromSurface(renderer: SDLRenderer, surface: SDLSurface): SDLTexture =>
+	fun createTextureFromSurface(renderer: SDLRenderer, surface: SDLSurface): SDLTexture =>
 		@SDL_CreateTextureFromSurface(renderer, surface)
 
-	fun sdl_CreateWindow(title: String, x: I32, y: I32, w: I32, h: I32, flags: SDLFlag val): SDLWindow =>
-		@SDL_CreateWindow(title.cstring(), x, y, w, h, flags.value())
+	fun createWindow(title: String, x: I32, y: I32, w: I32, h: I32, flags: SDLFlag val): SDLWindow =>
+		@SDL_CreateWindow(title.cstring(), x, y, w, h, flags())
 
-	fun sdl_Delay(ms: U32) =>
+	fun delay(ms: U32) =>
 		@SDL_Delay(ms)
 
-	fun sdl_DestroyRenderer(renderer: SDLRenderer) =>
+	fun destroyRenderer(renderer: SDLRenderer) =>
 		@SDL_DestroyRenderer(renderer)
 
-	fun sdl_DestroyTexture(texture: SDLTexture) =>
+	fun destroyTexture(texture: SDLTexture) =>
 		@SDL_DestroyTexture(texture)
 
-	fun sdl_DestroyWindow(window: SDLWindow) =>
+	fun destroyWindow(window: SDLWindow) =>
 		@SDL_DestroyWindow(window)
 
-	fun sdl_FillRect(dst: SDLSurface, rect: SDLPtrRect, color: U32): I32 =>
+	fun fillRect(dst: SDLSurface, rect: SDLPtrRect, color: U32): I32 =>
 		@SDL_FillRect(dst, rect, color)
 
-	fun sdl_FreeFormat(format: SDLPixelFormat) =>
+	fun freeFormat(format: SDLPixelFormat) =>
 		@SDL_FreeFormat(format)
 
-	fun sdl_FreeSurface(surface: SDLSurface) =>
+	fun freeSurface(surface: SDLSurface) =>
 		@SDL_FreeSurface(surface)
 
-	fun sdl_GetError(): String val =>
+	fun getError(): String val =>
 		recover String.from_cstring(@SDL_GetError()) end
 
-	fun sdl_GetWindowPixelFormat(window: SDLWindow): U32 =>
+	fun getWindowPixelFormat(window: SDLWindow): U32 =>
 		@SDL_GetWindowPixelFormat(window)
 
-	fun sdl_GetWindowSurface(window: SDLWindow): SDLSurface =>
+	fun getWindowSurface(window: SDLWindow): SDLSurface =>
 		@SDL_GetWindowSurface(window)
 
-	fun sdl_HideWindow(window: SDLWindow) =>
+	fun hideWindow(window: SDLWindow) =>
 		@SDL_HideWindow(window)
 
-	fun sdl_Init(flags: SDLFlag val): I32 =>
-		@SDL_Init(flags.value())
+	fun init(flags: SDLFlag val): I32 =>
+		@SDL_Init(flags())
 
-	fun sdl_LoadBMP(file: String): SDLSurface =>
+	fun loadBMP(file: String): SDLSurface =>
 		let mode: String = "rb"
 		@SDL_LoadBMP_RW(@SDL_RWFromFile(file.cstring(), mode.cstring()), 1)
 
-	fun sdl_LockSurface(surface: SDLSurface) =>
+	fun lockSurface(surface: SDLSurface) =>
 		@SDL_LockSurface(surface)
 
-	fun sdl_MapRGB(format: SDLPixelFormat, r: U8, g: U8, b:U8): U32 =>
+	fun mapRGB(format: SDLPixelFormat, r: U8, g: U8, b:U8): U32 =>
 		@SDL_MapRGB(format, r, g, b)
 
-	fun sdl_MapRGBA(format: SDLPixelFormat, r: U8, g: U8, b:U8, a: U8): U32 =>
+	fun mapRGBA(format: SDLPixelFormat, r: U8, g: U8, b:U8, a: U8): U32 =>
 		@SDL_MapRGBA(format, r, g, b, a)
 
-	fun sdl_MaximizeWindow(window: SDLWindow) =>
+	fun maximizeWindow(window: SDLWindow) =>
 		@SDL_MaximizeWindow(window)
 
-	fun sdl_MinimizeWindow(window: SDLWindow) =>
+	fun minimizeWindow(window: SDLWindow) =>
 		@SDL_MinimizeWindow(window)
 
-	fun sdl_Quit() =>
+	fun quit() =>
 		@SDL_Quit()
 
-	fun sdl_RaiseWindow(window: SDLWindow) =>
+	fun raiseWindow(window: SDLWindow) =>
 		@SDL_RaiseWindow(window)
 
-	fun sdl_RenderCopy(renderer: SDLRenderer, texture: SDLTexture,
-											srcrect: SDLPtrRect val, dstrect: SDLPtrRect): I32 =>
+	fun renderClear(renderer: SDLRenderer): I32 =>
+		@SDL_RenderClear(renderer)
+
+	fun renderCopy(renderer: SDLRenderer, texture: SDLTexture,
+											srcrect: SDLPtrRect, dstrect: SDLPtrRect): I32 =>
 		@SDL_RenderCopy(renderer, texture, srcrect, dstrect)
 
-	fun sdl_RenderCopyEx(renderer: SDLRenderer, texture: SDLTexture,
-											srcrect: SDLPtrRect val, dstrect: SDLPtrRect val, angle: F64 val,
-											center: SDLPtrPoint val, flip: SDLFlag val): I32 =>
-		@SDL_RenderCopyEx(renderer, texture, srcrect, dstrect, angle, center, flip.value())
+	fun renderCopyEx(renderer: SDLRenderer, texture: SDLTexture,
+											srcrect: SDLPtrRect, dstrect: SDLPtrRect, angle: F64,
+											center: SDLPtrPoint, flip: SDLFlag): I32 =>
+		@SDL_RenderCopyEx(renderer, texture, srcrect, dstrect, angle, center, flip())
 
-	fun sdl_RenderPresent(renderer: SDLRenderer) =>
+	fun renderPresent(renderer: SDLRenderer) =>
 		@SDL_RenderPresent(renderer)
 
-	fun sdl_RestoreWindow(window: SDLWindow) =>
+	fun restoreWindow(window: SDLWindow) =>
 		@SDL_RestoreWindow(window)
 
-	fun sdl_SetClipRect(surface: SDLSurface, rect: SDLRect): Bool =>
+	fun setClipRect(surface: SDLSurface, rect: SDLRect): Bool =>
 		if @SDL_SetClipRect(surface, rect) == 1 then
 			true
 		else
 			false
 		end
 
-	fun sdl_SetSurfaceAlpha_mod(surface: SDLSurface, alpha: U8) =>
+	fun setSurfaceAlpha_mod(surface: SDLSurface, alpha: U8) =>
 		@SDL_SetSurfaceAlphaMod(surface, alpha)
 
-	fun sdl_SetSurfaceBlend_mode(surface: SDLSurface, blendMode: SDLFlag) =>
-		@SDL_SetSurfaceBlendMode(surface, blendMode.value())
+	fun setSurfaceBlend_mode(surface: SDLSurface, blendMode: SDLFlag) =>
+		@SDL_SetSurfaceBlendMode(surface, blendMode())
 
-	fun sdl_SetSurfaceColorMod(surface: SDLSurface, r: U8, g: U8, b: U8) =>
+	fun setSurfaceColorMod(surface: SDLSurface, r: U8, g: U8, b: U8) =>
 		@SDL_SetSurfaceColorMod[I32](surface, r, g, b)
 
-	fun sdl_SetTextureAlphaMod(texture: SDLTexture, alpha: U8): I32 =>
+	fun setTextureAlphaMod(texture: SDLTexture, alpha: U8): I32 =>
 		@SDL_SetTextureAlphaMod(texture, alpha)
 
-	fun sdl_SetTextureBlendMode(texture: SDLTexture, blendMode: SDLFlag) =>
-		@SDL_SetTextureBlendMode(texture, blendMode.value())
+	fun setTextureBlendMode(texture: SDLTexture, blendMode: SDLFlag) =>
+		@SDL_SetTextureBlendMode(texture, blendMode())
 
-	fun sdl_SetTextureColorMod(texture: SDLTexture, r: U8, g: U8, b: U8) =>
+	fun setTextureColorMod(texture: SDLTexture, r: U8, g: U8, b: U8) =>
 		@SDL_SetTextureColorMod(texture, r, g, b)
 
-	fun sdl_set_WindowFullscreen(window: SDLWindow, flags: SDLFlag) =>
-		@SDL_SetWindowFullscreen(window, flags.value())
+	fun set_WindowFullscreen(window: SDLWindow, flags: SDLFlag) =>
+		@SDL_SetWindowFullscreen(window, flags())
 
-	fun sdl_set_WindowPosition(window: SDLWindow, x: I32, y: I32) =>
+	fun set_WindowPosition(window: SDLWindow, x: I32, y: I32) =>
 		@SDL_SetWindowPosition(window, x, y)
 
-	fun sdl_set_WindowSize(window: SDLWindow, w: I32, h: I32) =>
+	fun set_WindowSize(window: SDLWindow, w: I32, h: I32) =>
 		@SDL_SetWindowSize(window, w, h)
 
-	fun sdl_ShowWindow(window: SDLWindow) =>
+	fun showWindow(window: SDLWindow) =>
 		@SDL_ShowWindow(window)
 
-	fun sdl_UnlockSurface(surface: SDLSurface) =>
+	fun unlockSurface(surface: SDLSurface) =>
 		@SDL_UnlockSurface(surface)
 
-	new create(env: Env) =>
-		sdl_Init(VIDEO or AUDIO)
-		let win = sdl_CreateWindow("test", 0, 0, 500, 500, NULLFLAG)
-		let ren = sdl_CreateRenderer(win, -1, RENDERERACCELERATED)
-		var surf: SDLSurface = sdl_LoadBMP("pony_id.bmp")
 
-		var text = sdl_CreateTextureFromSurface(ren, surf)
+actor Main
+	new create(env: Env) =>
+		SDL.init(VIDEO or AUDIO)
+		let win = SDL.createWindow("test", 0, 0, 500, 500, NULLFLAG)
+		let ren = SDL.createRenderer(win, -1, RENDERERACCELERATED)
+		var surf: SDLSurface = SDL.loadBMP("pony_id.bmp")
+
+		var text = SDL.createTextureFromSurface(ren, surf)
 		let rect = SDLRect(0, 0, 200, 200)
 
-		sdl_RenderCopy(ren, text, recover SDLPtrRect.none() end, SDLPtrRect(rect))
-		sdl_RenderPresent(ren)
+		SDL.renderCopy(ren, text, SDLPtrRect.none(), SDLPtrRect(rect))
+		SDL.renderPresent(ren)
 
-		sdl_Delay(1000)
-		sdl_DestroyWindow(win)
-		sdl_Quit()
+		SDL.delay(1000)
+		SDL.destroyWindow(win)
+		SDL.quit()

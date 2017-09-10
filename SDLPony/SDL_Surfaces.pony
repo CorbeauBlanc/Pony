@@ -1,5 +1,22 @@
 use "collections"
 
+use @SDL_UpperBlit[I32](src: SDLSurface, srcrect: SDLPtrRect, dst: SDLSurface, dstrect: SDLPtrRect)
+use @SDL_CreateRenderer[SDLRenderer](window: SDLWindow, index: I32, flags: U32)
+use @SDL_CreateRGBSurface[SDLSurface](flags: U32, width: I32, height: I32, depth: I32, rMask: U32, gMask: U32, bMask: U32, aMask: U32)
+use @SDL_FillRect[I32](dst: SDLSurface, rect: SDLPtrRect, color: U32)
+use @SDL_FreeSurface[None](surface: SDLSurface)
+use @SDL_GetClipRect[None](surface: SDLSurface, rect: SDLRect)
+use @SDL_LoadBMP_RW[SDLSurface](src: SDLRWops, freesrc: I32)
+use @SDL_LockSurface[I32](surface: SDLSurface)
+use @SDL_RWFromFile[SDLRWops](file: Pointer[U8] tag, mode: Pointer[U8] tag)
+use @SDL_RestoreWindow[None](window: SDLWindow)
+use @SDL_SetClipRect[U8](surface: SDLSurface, rect: SDLRect)
+use @SDL_SetSurfaceAlphaMod[I32](surface: SDLSurface, alpha: U8)
+use @SDL_SetSurfaceBlendMode[I32](surface: SDLSurface, blendMode: U32)
+use @SDL_SetSurfaceColorMod[I32](surface: SDLSurface, r: U8, g: U8, b: U8)
+use @SDL_UnlockSurface[I32](surface: SDLSurface)
+
+
 primitive _SDLRect
 struct SDLRect
 	var x: I32 = 0

@@ -1,5 +1,12 @@
 use "collections"
 
+use @SDL_AllocFormat[SDLPixelFormat](pixel_format: U32)
+use @SDL_FreeFormat[None](format: SDLPixelFormat)
+use @SDL_GetWindowPixelFormat[U32](window: SDLWindow)
+use @SDL_MapRGB[U32](format: SDLPixelFormat, r: U8, g: U8, b: U8)
+use @SDL_MapRGBA[U32](format: SDLPixelFormat, r: U8, g: U8, b: U8, a: U8)
+
+
 primitive _Color
 struct SDLColor
 	var r: U8 = 0
@@ -37,10 +44,10 @@ struct PixelFormat
 type SDLPixelFormat is Pointer[_PixelFormat]
 
 primitive BLENDMODENONE is SDLFlag
-	fun value(): U32 => 0x00000000
+	fun apply(): U32 => 0x00000000
 primitive BLENDMODEBLEND is SDLFlag
-	fun value(): U32 => 0x00000001
+	fun apply(): U32 => 0x00000001
 primitive BLENDMODEADD is SDLFlag
-	fun value(): U32 => 0x00000002
+	fun apply(): U32 => 0x00000002
 primitive BLENDMODEMOD is SDLFlag
-	fun value(): U32 => 0x00000004
+	fun apply(): U32 => 0x00000004
