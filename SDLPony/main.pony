@@ -118,6 +118,10 @@ primitive SDL
 			false
 		end
 
+	fun setRenderDrawColor(renderer: SDLRenderer,
+													r: U8, g: U8, b:U8, a: U8): I32 =>
+		@SDL_SetRenderDrawColor(renderer, r, g, b, a)
+
 	fun setSurfaceAlpha_mod(surface: SDLSurface, alpha: U8) =>
 		@SDL_SetSurfaceAlphaMod(surface, alpha)
 
