@@ -1,5 +1,4 @@
-#include <stdlib.h>
-#include "../FMOD/inc/fmod.h"
+#include "cf_PMOD.h"
 
 FMOD_SYSTEM	*FMOD_Alt_System_Create()
 {

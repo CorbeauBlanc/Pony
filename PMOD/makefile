@@ -28,5 +28,6 @@ clean:
 	@if [ -e $(NAME) ]; then\
 		rm $(NAME);\
 	fi
+	rm $(C_DIR)/*.o
 
 re: clean all
