@@ -37,7 +37,7 @@ primitive VOL0BECOMESVIRTUAL is FMODInitFlag
 	fun apply(): U32 => 0x00020000
 primitive GEOMETRYUSECLOSEST is FMODInitFlag
 	fun apply(): U32 => 0x00040000
-primitive PREFERDOLBY_DOWNMIX is FMODInitFlag
+primitive PREFERDOLBYDOWNMIX is FMODInitFlag
 	fun apply(): U32 => 0x00080000
 primitive THREADUNSAFE is FMODInitFlag
 	fun apply(): U32 => 0x00100000

@@ -1,8 +1,12 @@
 use "collections"
 
 
-use @FMOD_System_Create[I32](system: Pointer[FMODSystem])
+use @FMOD_System_Close[I32](system: FMODSystem)
+use @FMOD_Alt_System_Create[FMODSystem]()
 use @FMOD_System_Init[I32](system: FMODSystem, maxchannels: I32, flags: FMODInitFlag, extradriverdata: Pointer[U8])
+use @FMOD_System_Release[I32](system: FMODSystem)
+use @FMOD_System_Update[I32](system: FMODSystem)
+
 
 primitive _FMODSystem
 type FMODSystem is Pointer[_FMODSystem]

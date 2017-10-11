@@ -6,10 +6,23 @@ use "lib:fmod"
 
 primitive FMOD
 
-	fun systemCreate(system: FMODSystem): I32 =>
-		@FMOD_System_Create(Pointer[FMODSystem](system))
+	fun systemClose(system: FMODSystem): FMODResult =>
+		@FMOD_System_Close(system)
+
+	fun systemCreate(): FMODSystem =>
+		@FMOD_Alt_System_Create()
+
+	fun systemRelease(system: FMODSystem): FMODResult =>
+		@FMOD_System_Release(system)
+
+	fun systemUpdate(system: FMODSystem): FMODResult =>
+		@FMOD_System_Update(system)
 
 
 actor Main
 	new create(env: Env) =>
-		env.out.print("Hello World !")
+		var system: FMODSystem = FMOD.systemCreate()
+
+		if system.is_null() then
+			env.out.print("ERROR")
+		end
