@@ -1,5 +1,5 @@
 PC=ponyc
-PFLAGS= --linker="gcc -no-pie"
+#PFLAGS= --linker="gcc -no-pie"
 DBG_FCTS= debug_fcts.o
 MAKE=/usr/bin/make
 NAME=$(notdir $(CURDIR))
