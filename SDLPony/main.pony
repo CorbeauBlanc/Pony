@@ -155,6 +155,12 @@ primitive SDL
 	fun unlockSurface(surface: SDLSurface) =>
 		@SDL_UnlockSurface(surface)
 
+	fun pollEvent(event: SDLPtrEvent): I32 =>
+		@SDL_PollEvent(event)
+
+	fun waitEvent(event: SDLPtrEvent): I32 =>
+		@SDL_WaitEvent(event)
+
 
 actor Main
 	new create(env: Env) =>
@@ -169,6 +175,11 @@ actor Main
 		SDL.renderCopy(ren, text, SDLPtrRect.none(), SDLPtrRect(rect))
 		SDL.renderPresent(ren)
 
-		SDL.delay(1000)
+		var event: SDLEvent = SDLEvent
+		while event.evt_type != QUIT() do
+			SDL.waitEvent(SDLPtrEvent(event))
+			env.out.print(event.evt_type.string())
+		end
+
 		SDL.destroyWindow(win)
 		SDL.quit()
