@@ -430,46 +430,15 @@ struct SDLUserEvent
 
 struct SDLEvent
 	var evt_type: U32 = 0
-	var axis: U8 = 0
-	var ball: U8 = 0
-	var button: U8 = 0
-	var clicks: U8 = 0
-	var code: I32 = 0
-	var data1: (I32 | Pointer[U8]) = 0
-	var data2: (I32 | Pointer[U8]) = 0
-	var dDist: F32 = 0
-	var direction: U32 = 0
-	var dTheta: F32 = 0
-	var dx: F32 = 0
-	var dy: F32 = 0
-	var event: U8 = 0
-	var evt_error: F32 = 0
-	var file: Pointer[U8] = Pointer[U8]
-	var fingerId: SDLFingerID = 0
-	var gestureId: SDLGestureID = 0
-	var hat: U8 = 0
-	var iscapture: U8 = 0
-	var keysym: SDLKeysym = SDLKeysym
-	var krepeat: U8 = 0
-	var length: I32 = 0
-	var mod: U16 = 0
-	var numFingers: (U32 | U16) = U32(0)
-	var pressure: F32 = 0
-	var scancode: SDLScancode = 0
-	var start: I32 = 0
-	var state: (U8 | U32) = U32(0)
-	var sym: SDLKeycode = 0
-	var text: Pointer[U8] = Pointer[U8]
 	var timestamp: U32 = 0
-	var touchId: SDLTouchID = 0
-	var unused: U32 = 0
-	var value: (I16 | U8) = I16(0)
-	var which: (I32 | U32 | SDLJoystickID) = I32(0)
-	var windowID: U32 = 0
-	var x: (F32 | I32) = F32(0)
-	var xrel: (I16 | I32) = I32(0)
-	var y: (I16 | I32) = I32(0)
-	var yrel: (I16 | I32) = I32(0)
+	var data1: (U32 | I32 | I64 | Pointer[U8]) = I64(0)
+	var data2: (U8 | Pointer[U8] | U32 | I64 | F32 | I32) = I64(0)
+	var data3: (I32 | U8 | U32 | F32 | Pointer[U8]) = F32(0)
+	var data4: (I32 | U8 | F32 | Pointer[U8]) = F32(0)
+	var data5: (U8 | I32 | U32 | F32) = F32(0)
+	var data6: (I32 | U8 | SDLKeysym | I16 | F32 | U16) = F32(0)
+	var data7: (U16 | I32 | I16 | F32) = F32(0)
+	var data8: I32 = 0
 
 
 type SDLPtrEvent is MaybePointer[SDLEvent]
