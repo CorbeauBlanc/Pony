@@ -116,6 +116,7 @@ primitive LASTEVENT
 	fun apply(): U32 => 65535
 
 
+type SDLPtrCommonEvent is MaybePointer[SDLCommonEvent]
 struct SDLCommonEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -129,6 +130,7 @@ struct SDLCommonEvent
 	var _padding8: I32 = 0
 
 
+type SDLPtrWindowEvent is MaybePointer[SDLWindowEvent]
 struct SDLWindowEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -142,6 +144,7 @@ struct SDLWindowEvent
 	var _padding4: I32 = 0
 
 
+type SDLPtrKeyboardEvent is MaybePointer[SDLKeyboardEvent]
 struct SDLKeyboardEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -155,6 +158,7 @@ struct SDLKeyboardEvent
 	var _padding4: I32 = 0
 
 
+type SDLPtrTextEditingEvent is MaybePointer[SDLTextEditingEvent]
 struct SDLTextEditingEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -168,6 +172,7 @@ struct SDLTextEditingEvent
 	var _padding4: I32 = 0
 
 
+type SDLPtrTextInputEvent is MaybePointer[SDLTextInputEvent]
 struct SDLTextInputEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -181,6 +186,7 @@ struct SDLTextInputEvent
 	var _padding6: I32 = 0
 
 
+type SDLPtrMouseMotionEvent is MaybePointer[SDLMouseMotionEvent]
 struct SDLMouseMotionEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -194,6 +200,7 @@ struct SDLMouseMotionEvent
 	var _padding: I32 = 0
 
 
+type SDLPtrMouseButtonEvent is MaybePointer[SDLMouseButtonEvent]
 struct SDLMouseButtonEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -207,6 +214,7 @@ struct SDLMouseButtonEvent
 	var y: I32 = 0
 
 
+type SDLPtrMouseWheelEvent is MaybePointer[SDLMouseWheelEvent]
 struct SDLMouseWheelEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -220,6 +228,7 @@ struct SDLMouseWheelEvent
 	var _padding3: I32 = 0
 
 
+type SDLPtrJoyAxisEvent is MaybePointer[SDLJoyAxisEvent]
 struct SDLJoyAxisEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -233,6 +242,7 @@ struct SDLJoyAxisEvent
 	var _padding5: I32 = 0
 
 
+type SDLPtrJoyBallEvent is MaybePointer[SDLJoyBallEvent]
 struct SDLJoyBallEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -246,6 +256,7 @@ struct SDLJoyBallEvent
 	var _padding4: I32 = 0
 
 
+type SDLPtrJoyHatEvent is MaybePointer[SDLJoyHatEvent]
 struct SDLJoyHatEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -259,6 +270,7 @@ struct SDLJoyHatEvent
 	var _padding5: I32 = 0
 
 
+type SDLPtrJoyButtonEvent is MaybePointer[SDLJoyButtonEvent]
 struct SDLJoyButtonEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -272,6 +284,7 @@ struct SDLJoyButtonEvent
 	var _padding5: I32 = 0
 
 
+type SDLPtrJoyDeviceEvent is MaybePointer[SDLJoyDeviceEvent]
 struct SDLJoyDeviceEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -285,6 +298,7 @@ struct SDLJoyDeviceEvent
 	var _padding7: I32 = 0
 
 
+type SDLPtrControllerAxisEvent is MaybePointer[SDLControllerAxisEvent]
 struct SDLControllerAxisEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -298,6 +312,7 @@ struct SDLControllerAxisEvent
 	var _padding5: I32 = 0
 
 
+type SDLPtrControllerButtonEvent is MaybePointer[SDLControllerButtonEvent]
 struct SDLControllerButtonEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -311,6 +326,7 @@ struct SDLControllerButtonEvent
 	var _padding5: I32 = 0
 
 
+type SDLPtrControllerDeviceEvent is MaybePointer[SDLControllerDeviceEvent]
 struct SDLControllerDeviceEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -324,6 +340,7 @@ struct SDLControllerDeviceEvent
 	var _padding7: I32 = 0
 
 
+type SDLPtrAudioDeviceEvent is MaybePointer[SDLAudioDeviceEvent]
 struct SDLAudioDeviceEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -337,6 +354,7 @@ struct SDLAudioDeviceEvent
 	var _padding6: I32 = 0
 
 
+type SDLPtrTouchFingerEvent is MaybePointer[SDLTouchFingerEvent]
 struct SDLTouchFingerEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -350,6 +368,7 @@ struct SDLTouchFingerEvent
 	var _padding: I32 = 0
 
 
+type SDLPtrMultiGestureEvent is MaybePointer[SDLMultiGestureEvent]
 struct SDLMultiGestureEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -363,6 +382,7 @@ struct SDLMultiGestureEvent
 	var _padding2: I32 = 0
 
 
+type SDLPtrDollarGestureEvent is MaybePointer[SDLDollarGestureEvent]
 struct SDLDollarGestureEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -376,6 +396,7 @@ struct SDLDollarGestureEvent
 	var _padding2: I32 = 0
 
 
+type SDLPtrDropEvent is MaybePointer[SDLDropEvent]
 struct SDLDropEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -389,6 +410,7 @@ struct SDLDropEvent
 	var _padding6: I32 = 0
 
 
+type SDLPtrQuitEvent is MaybePointer[SDLQuitEvent]
 struct SDLQuitEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -402,6 +424,7 @@ struct SDLQuitEvent
 	var _padding8: I32 = 0
 
 
+type SDLPtrOSEvent is MaybePointer[SDLOSEvent]
 struct SDLOSEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -415,6 +438,7 @@ struct SDLOSEvent
 	var _padding8: I32 = 0
 
 
+type SDLPtrUserEvent is MaybePointer[SDLUserEvent]
 struct SDLUserEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
@@ -428,17 +452,44 @@ struct SDLUserEvent
 	var _padding4: I32 = 0
 
 
+type SDLPtrEvent is MaybePointer[SDLEvent]
 struct SDLEvent
 	var evt_type: U32 = 0
 	var timestamp: U32 = 0
-	var data1: (U32 | I32 | I64 | Pointer[U8]) = I64(0)
-	var data2: (U8 | Pointer[U8] | U32 | I64 | F32 | I32) = I64(0)
-	var data3: (I32 | U8 | U32 | F32 | Pointer[U8]) = F32(0)
-	var data4: (I32 | U8 | F32 | Pointer[U8]) = F32(0)
-	var data5: (U8 | I32 | U32 | F32) = I32(0)
-	var data6: (I32 | U8 | SDLKeysym | I16 | F32 | U16) = I32(0)
-	var data7: (U16 | I32 | I16 | F32) = F32(0)
-	var data8: I32 = 0
+	var _padding1: U64 = 0
+	var _padding2: U64 = 0
+	var _padding3: U64 = 0
+	var _padding4: U64 = 0
+	var _padding5: U64 = 0
+	var _padding6: U64 = 0
 
 
-type SDLPtrEvent is (MaybePointer[SDLEvent] | MaybePointer[SDLMouseMotionEvent])
+type SDLPtrEvent is (
+	MaybePointer[SDLEvent]
+	| SDLPtrCommonEvent
+	| SDLPtrWindowEvent
+	| SDLPtrKeyboardEvent
+	| SDLPtrTextEditingEvent
+	| SDLPtrTextInputEvent
+	| SDLPtrMouseMotionEvent
+	| SDLPtrMouseButtonEvent
+	| SDLPtrMouseWheelEvent
+	| SDLPtrJoyAxisEvent
+	| SDLPtrJoyBallEvent
+	| SDLPtrJoyHatEvent
+	| SDLPtrJoyButtonEvent
+	| SDLPtrJoyDeviceEvent
+	| SDLPtrControllerAxisEvent
+	| SDLPtrControllerButtonEvent
+	| SDLPtrControllerDeviceEvent
+	| SDLPtrAudioDeviceEvent
+	| SDLPtrTouchFingerEvent
+	| SDLPtrMultiGestureEvent
+	| SDLPtrDollarGestureEvent
+	| SDLPtrDropEvent
+	| SDLPtrQuitEvent
+	| SDLPtrOSEvent
+	| SDLPtrUserEvent
+	| SDLPtrEvent
+	| SDLPtrEvent
+)

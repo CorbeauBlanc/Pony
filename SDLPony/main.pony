@@ -6,7 +6,7 @@ use @SDL_Delay[None](ms: U32)
 use @SDL_GetError[Pointer[U8]]()
 use @SDL_Init[I32](flags: U32 tag)
 use @SDL_Quit[None]()
-use @malloc_event[MaybePointer[SDLEvent]]()
+use @memcpy[SDLPtrEvent](ptr: MaybePointer[SDLEvent], ptr2: Pointer[U8], size: U32)
 
 
 primitive SDL
@@ -156,15 +156,14 @@ primitive SDL
 	fun unlockSurface(surface: SDLSurface) =>
 		@SDL_UnlockSurface(surface)
 
-	fun pollEvent(event: SDLPtrEvent): (I32 | None) =>
-		try
-			@SDL_PollEvent(event as MaybePointer[SDLEvent])
-		end
+	fun pollEvent(event: MaybePointer[SDLEvent]): I32 =>
+		@SDL_PollEvent(event)
 
-	fun waitEvent(event: SDLPtrEvent): (I32 | None) =>
-		try
-			@SDL_WaitEvent(event as MaybePointer[SDLEvent])
-		end
+	fun waitEvent(event: MaybePointer[SDLEvent]): I32 =>
+		@SDL_WaitEvent(event)
+
+	fun castEvent(event: MaybePointer[SDLEvent]): SDLPtrEvent =>
+		@memcpy(ptr, Pointer[U8], 0)
 
 
 actor Main
@@ -176,26 +175,20 @@ actor Main
 
 		var text = SDL.createTextureFromSurface(ren, surf)
 		let rect = SDLRect(0, 0, 200, 200)
-
 		SDL.renderCopy(ren, text, SDLPtrRect.none(), SDLPtrRect(rect))
 		SDL.renderPresent(ren)
 
-		var ptr: MaybePointer[SDLEvent] = @malloc_event()
-		try
-			var test: MaybePointer[SDLMouseMotionEvent] = ptr as MaybePointer[SDLMouseMotionEvent]
+		var event: SDLEvent = SDLEvent
+		var ptr: MaybePointer[SDLEvent] = MaybePointer[SDLEvent](event)
+
+		while event.evt_type != QUIT() do
+			SDL.waitEvent(ptr)
+			if event.evt_type == MOUSEMOTION() then
+				try
+					var mouse: SDLMouseMotionEvent = (castEvent(ptr) as MaybePointer[SDLMouseMotionEvent]).apply()?
+					env.out.print("x: " + mouse.x.string() + " | y: " + mouse.y.string())
+				end
+			end
 		end
-		//try
-		//	var event: SDLEvent = ptr()?
-		//	while event.evt_type != QUIT() do
-				//SDL.waitEvent(ptr)
-				//event = (ptr as MaybePointer[SDLEvent]).apply()?
-				//if event.evt_type == MOUSEMOTION() then
-				//	var mouse: SDLMouseMotionEvent = (ptr as MaybePointer[SDLMouseMotionEvent]).apply()?
-					//try
-					//	env.out.print((event.data4 as I32).string())
-					//end
-				//end
-		//	end
-		//end
 		SDL.destroyWindow(win)
 		SDL.quit()
