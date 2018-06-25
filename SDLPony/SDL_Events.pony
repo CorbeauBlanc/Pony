@@ -1,7 +1,7 @@
 use "collections"
 
-use @SDL_PollEvent[I32](event: SDLPtrEvent)
-use @SDL_WaitEvent[I32](event: SDLPtrEvent)
+use @SDL_PollEvent[I32](event: MaybePointer[SDLEvent])
+use @SDL_WaitEvent[I32](event: MaybePointer[SDLEvent])
 
 
 type SDLJoystickID is I32
@@ -435,10 +435,10 @@ struct SDLEvent
 	var data2: (U8 | Pointer[U8] | U32 | I64 | F32 | I32) = I64(0)
 	var data3: (I32 | U8 | U32 | F32 | Pointer[U8]) = F32(0)
 	var data4: (I32 | U8 | F32 | Pointer[U8]) = F32(0)
-	var data5: (U8 | I32 | U32 | F32) = F32(0)
-	var data6: (I32 | U8 | SDLKeysym | I16 | F32 | U16) = F32(0)
+	var data5: (U8 | I32 | U32 | F32) = I32(0)
+	var data6: (I32 | U8 | SDLKeysym | I16 | F32 | U16) = I32(0)
 	var data7: (U16 | I32 | I16 | F32) = F32(0)
 	var data8: I32 = 0
 
 
-type SDLPtrEvent is MaybePointer[SDLEvent]
+type SDLPtrEvent is (MaybePointer[SDLEvent] | MaybePointer[SDLMouseMotionEvent])

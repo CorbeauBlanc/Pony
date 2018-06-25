@@ -1,3 +1,5 @@
+CC=gcc
+CFLAGS=-Wall -Wextra -Werror
 PC=ponyc
 #PFLAGS= --linker="gcc -no-pie"
 DBG_FCTS= debug_fcts.o
