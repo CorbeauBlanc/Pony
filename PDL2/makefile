@@ -1,7 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 PC=ponyc
-#PFLAGS= --linker="gcc -no-pie"
 DBG_FCTS= debug_fcts.o
 MAKE=/usr/bin/make
 NAME=$(notdir $(CURDIR))
@@ -9,7 +8,7 @@ NAME=$(notdir $(CURDIR))
 .PHONY: all debug clean re
 
 $(NAME):
-	$(PC) $(PFLAGS)
+	$(PC)
 
 all: $(NAME)
 
