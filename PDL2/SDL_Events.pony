@@ -462,34 +462,3 @@ struct SDLEvent
 	var _padding4: U64 = 0
 	var _padding5: U64 = 0
 	var _padding6: U64 = 0
-
-
-type SDLPtrEvent is (
-	MaybePointer[SDLEvent]
-	| SDLPtrCommonEvent
-	| SDLPtrWindowEvent
-	| SDLPtrKeyboardEvent
-	| SDLPtrTextEditingEvent
-	| SDLPtrTextInputEvent
-	| SDLPtrMouseMotionEvent
-	| SDLPtrMouseButtonEvent
-	| SDLPtrMouseWheelEvent
-	| SDLPtrJoyAxisEvent
-	| SDLPtrJoyBallEvent
-	| SDLPtrJoyHatEvent
-	| SDLPtrJoyButtonEvent
-	| SDLPtrJoyDeviceEvent
-	| SDLPtrControllerAxisEvent
-	| SDLPtrControllerButtonEvent
-	| SDLPtrControllerDeviceEvent
-	| SDLPtrAudioDeviceEvent
-	| SDLPtrTouchFingerEvent
-	| SDLPtrMultiGestureEvent
-	| SDLPtrDollarGestureEvent
-	| SDLPtrDropEvent
-	| SDLPtrQuitEvent
-	| SDLPtrOSEvent
-	| SDLPtrUserEvent
-	| SDLPtrEvent
-	| SDLPtrEvent
-)
