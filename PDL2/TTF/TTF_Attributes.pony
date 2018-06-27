@@ -19,26 +19,26 @@ use @TTF_FontDescent[I32](font: TTFFont)
 use @TTF_FontLineSkip[I32](font: TTFFont)
 
 use @TTF_FontFaceIsFixedWidth[I32](font: TTFFont)
-use @TTF_FontFaceFamilyName[Pointer[U8]](font: TTFFont)
-use @TTF_FontFaceStyleName[Pointer[U8]](font: TTFFont)
+use @TTF_FontFaceFamilyName[Pointer[U8]](font: TTFFont tag)
+use @TTF_FontFaceStyleName[Pointer[U8]](font: TTFFont tag)
 
 
-primitive STYLENORMAL is SDLFlag
+primitive STYLENORMAL is TTFFlag
 	fun apply(): U32 => 0x00000000
-primitive STYLEBOLD is SDLFlag
+primitive STYLEBOLD is TTFFlag
 	fun apply(): U32 => 0x00000001
-primitive STYLEITALIC is SDLFlag
+primitive STYLEITALIC is TTFFlag
 	fun apply(): U32 => 0x00000002
-primitive STYLEUNDERLINE is SDLFlag
+primitive STYLEUNDERLINE is TTFFlag
 	fun apply(): U32 => 0x00000004
-primitive STYLESTRIKETHROUGH is SDLFlag
+primitive STYLESTRIKETHROUGH is TTFFlag
 	fun apply(): U32 => 0x00000008
 
-primitive HINTINGNORMAL is SDLFlag
+primitive HINTINGNORMAL is TTFFlag
 	fun apply(): U32 => 0
-primitive HINTINGLIGHT is SDLFlag
+primitive HINTINGLIGHT is TTFFlag
 	fun apply(): U32 => 1
-primitive HINTINGMONO is SDLFlag
+primitive HINTINGMONO is TTFFlag
 	fun apply(): U32 => 2
-primitive HINTINGNONE is SDLFlag
+primitive HINTINGNONE is TTFFlag
 	fun apply(): U32 => 3
