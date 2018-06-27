@@ -53,7 +53,8 @@ struct Surface
 	var _map: Pointer[_BlitMap] = Pointer[_BlitMap]
 	var refcount: I32 = 0
 
-type SDLSurface is Pointer[_Surface]
+type SDLPtrSurface is Pointer[_Surface]
+type SDLSurface is MaybePointer[Surface]
 
 primitive _SDLRWops
 type SDLRWops is Pointer[_SDLRWops]

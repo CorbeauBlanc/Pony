@@ -41,7 +41,8 @@ struct PixelFormat
 	var _aShift: U8 = 0
 	var _refcount: I32 = 0
 	var _next: Pointer[_PixelFormat] = Pointer[_PixelFormat]
-type SDLPixelFormat is Pointer[_PixelFormat]
+type SDLPtrPixelFormat is Pointer[_PixelFormat]
+type SDLPixelFormat is MaybePointer[PixelFormat]
 
 primitive BLENDMODENONE is SDLFlag
 	fun apply(): U32 => 0x00000000

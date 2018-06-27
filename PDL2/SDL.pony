@@ -6,7 +6,6 @@ use @SDL_Delay[None](ms: U32)
 use @SDL_GetError[Pointer[U8]]()
 use @SDL_Init[I32](flags: U32 tag)
 use @SDL_Quit[None]()
-use @memcpy[SDLPtrEvent](ptr: MaybePointer[SDLEvent], ptr2: Pointer[U8], size: U32)
 
 
 primitive SDL
@@ -21,7 +20,7 @@ primitive SDL
 		@SDL_CreateRenderer(window, index, flags())
 
 	fun createRGBSurface(width: I32, height: I32, depth: I32,
-												rMask: U32, gMask: U32, bMask: U32, aMask: U32): Pointer[_Surface] =>
+												rMask: U32, gMask: U32, bMask: U32, aMask: U32): SDLSurface =>
 		@SDL_CreateRGBSurface(0, width, height, depth, rMask, gMask, bMask, aMask)
 
 	fun createTexture(renderer: SDLRenderer, format: U32, access: U32, w: I32, h: I32): SDLTexture =>
@@ -30,7 +29,7 @@ primitive SDL
 	fun createTextureFromSurface(renderer: SDLRenderer, surface: SDLSurface): SDLTexture =>
 		@SDL_CreateTextureFromSurface(renderer, surface)
 
-	fun createWindow(title: String, x: I32, y: I32, w: I32, h: I32, flags: SDLFlag val): SDLWindow =>
+	fun createWindow(title: String val, x: I32, y: I32, w: I32, h: I32, flags: SDLFlag val): SDLWindow =>
 		@SDL_CreateWindow(title.cstring(), x, y, w, h, flags())
 
 	fun delay(ms: U32) =>
@@ -69,7 +68,7 @@ primitive SDL
 	fun init(flags: SDLFlag val): I32 =>
 		@SDL_Init(flags())
 
-	fun loadBMP(file: String): SDLSurface =>
+	fun loadBMP(file: String val): SDLSurface =>
 		let mode: String = "rb"
 		@SDL_LoadBMP_RW(@SDL_RWFromFile(file.cstring(), mode.cstring()), 1)
 
@@ -161,6 +160,3 @@ primitive SDL
 
 	fun waitEvent(event: MaybePointer[SDLEvent]): I32 =>
 		@SDL_WaitEvent(event)
-
-	fun castEvent(event: MaybePointer[SDLEvent]): SDLPtrEvent =>
-		@memcpy(ptr, Pointer[U8], 0)
