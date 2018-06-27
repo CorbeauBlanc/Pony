@@ -20,7 +20,7 @@ primitive SDL
 		@SDL_CreateRenderer(window, index, flags())
 
 	fun createRGBSurface(width: I32, height: I32, depth: I32,
-												rMask: U32, gMask: U32, bMask: U32, aMask: U32): Pointer[_Surface] =>
+												rMask: U32, gMask: U32, bMask: U32, aMask: U32): SDLSurface =>
 		@SDL_CreateRGBSurface(0, width, height, depth, rMask, gMask, bMask, aMask)
 
 	fun createTexture(renderer: SDLRenderer, format: U32, access: U32, w: I32, h: I32): SDLTexture =>

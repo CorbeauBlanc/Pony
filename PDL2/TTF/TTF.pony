@@ -2,6 +2,7 @@ use "collections"
 use "strings"
 use "lib:SDL2"
 use "lib:SDL_ttf"
+use "../"
 
 use @TTF_Init[I32]()
 use @TTF_WasInit[I32]()
@@ -98,4 +99,88 @@ primitive TTF
 	fun fontFaceStyleName(font: TTFFont): (String | None) =>
 		if not font.is_null() then
 			recover String.from_cstring(@TTF_FontFaceStyleName(font)) end
+		end
+
+	fun renderTextSolid(font: TTFFont, text: String, fg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderText_Solid(font, text.cstring(), fg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderUTF8Solid(font: TTFFont, text: String, fg: SDLColor): SDLSurface =>
+	if not font.is_null() then
+		@TTF_RenderUTF8_Solid(font, text.cstring(), fg)
+	else
+		SDLSurface.none()
+	end
+
+	fun renderUNICODESolid(font: TTFFont, text: Array[U16], fg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderUNICODE_Solid(font, text.cpointer(), fg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderGlyphSolid(font: TTFFont, text: U16, fg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderGlyph_Solid(font, text, fg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderTextShaded(font: TTFFont, text: String, fg: SDLColor, bg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderText_Shaded(font, text.cstring(), fg, bg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderUTF8Shaded(font: TTFFont, text: String, fg: SDLColor, bg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderUTF8_Shaded(font, text.cstring(), fg, bg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderUNICODEShaded(font: TTFFont, text: Array[U16], fg: SDLColor, bg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderUNICODE_Shaded(font, text.cpointer(), fg, bg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderGlyphShaded(font: TTFFont, text: U16, fg: SDLColor, bg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderGlyph_Shaded(font, text, fg, bg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderTextBlended(font: TTFFont, text: String, fg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderText_Blended(font, text.cstring(), fg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderUTF8Blended(font: TTFFont, text: String, fg: SDLColor): SDLSurface =>
+	if not font.is_null() then
+		@TTF_RenderUTF8_Blended(font, text.cstring(), fg)
+	else
+		SDLSurface.none()
+	end
+
+	fun renderUNICODEBlended(font: TTFFont, text: Array[U16], fg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderUNICODE_Blended(font, text.cpointer(), fg)
+		else
+			SDLSurface.none()
+		end
+
+	fun renderGlyphBlended(font: TTFFont, text: U16, fg: SDLColor): SDLSurface =>
+		if not font.is_null() then
+			@TTF_RenderGlyph_Blended(font, text, fg)
+		else
+			SDLSurface.none()
 		end
