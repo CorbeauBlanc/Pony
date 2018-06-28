@@ -1,6 +1,6 @@
 use "collections"
 use "strings"
-use "TTF"
+use "IMG"
 
 actor Main
 	new create(env: Env) =>
@@ -13,9 +13,6 @@ actor Main
 		let rect = SDLRect(0, 0, 200, 200)
 		SDL.renderCopy(ren, text, SDLPtrRect.none(), SDLPtrRect(rect))
 		SDL.renderPresent(ren)
-
-		TTF.init()
-		var font = TTF.openFont("test", 12)
 
 		var event: SDLEvent = SDLEvent
 		var ptr: SDLPtrEvent = SDLPtrEvent(event)

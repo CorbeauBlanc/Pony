@@ -23,22 +23,22 @@ use @TTF_FontFaceFamilyName[Pointer[U8]](font: TTFFont tag)
 use @TTF_FontFaceStyleName[Pointer[U8]](font: TTFFont tag)
 
 
-primitive STYLENORMAL is TTFFlag
+primitive TTFSTYLENORMAL is TTFFlag
 	fun apply(): U32 => 0x00000000
-primitive STYLEBOLD is TTFFlag
+primitive TTFSTYLEBOLD is TTFFlag
 	fun apply(): U32 => 0x00000001
-primitive STYLEITALIC is TTFFlag
+primitive TTFSTYLEITALIC is TTFFlag
 	fun apply(): U32 => 0x00000002
-primitive STYLEUNDERLINE is TTFFlag
+primitive TTFSTYLEUNDERLINE is TTFFlag
 	fun apply(): U32 => 0x00000004
-primitive STYLESTRIKETHROUGH is TTFFlag
+primitive TTFSTYLESTRIKETHROUGH is TTFFlag
 	fun apply(): U32 => 0x00000008
 
-primitive HINTINGNORMAL is TTFFlag
+primitive TTFHINTINGNORMAL is TTFFlag
 	fun apply(): U32 => 0
-primitive HINTINGLIGHT is TTFFlag
+primitive TTFHINTINGLIGHT is TTFFlag
 	fun apply(): U32 => 1
-primitive HINTINGMONO is TTFFlag
+primitive TTFHINTINGMONO is TTFFlag
 	fun apply(): U32 => 2
-primitive HINTINGNONE is TTFFlag
+primitive TTFHINTINGNONE is TTFFlag
 	fun apply(): U32 => 3
