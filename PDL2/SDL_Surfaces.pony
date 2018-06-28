@@ -14,6 +14,7 @@ use @SDL_SetClipRect[U8](surface: SDLSurface, rect: SDLRect)
 use @SDL_SetSurfaceAlphaMod[I32](surface: SDLSurface, alpha: U8)
 use @SDL_SetSurfaceBlendMode[I32](surface: SDLSurface, blendMode: U32)
 use @SDL_SetSurfaceColorMod[I32](surface: SDLSurface, r: U8, g: U8, b: U8)
+use @SDL_SetSurfaceRLE[I32](surface: SDLSurface, flag: I32)
 use @SDL_UnlockSurface[I32](surface: SDLSurface)
 
 

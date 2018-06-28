@@ -122,14 +122,17 @@ primitive SDL
 													r: U8, g: U8, b:U8, a: U8): I32 =>
 		@SDL_SetRenderDrawColor(renderer, r, g, b, a)
 
-	fun setSurfaceAlpha_mod(surface: SDLSurface, alpha: U8) =>
+	fun setSurfaceAlphaMod(surface: SDLSurface, alpha: U8) =>
 		@SDL_SetSurfaceAlphaMod(surface, alpha)
 
-	fun setSurfaceBlend_mode(surface: SDLSurface, blendMode: SDLFlag) =>
+	fun setSurfaceBlendMode(surface: SDLSurface, blendMode: SDLFlag) =>
 		@SDL_SetSurfaceBlendMode(surface, blendMode())
 
 	fun setSurfaceColorMod(surface: SDLSurface, r: U8, g: U8, b: U8) =>
 		@SDL_SetSurfaceColorMod[I32](surface, r, g, b)
+
+	fun setSurfaceRLE(surface: SDLSurface, flag: Bool): I32 =>
+		@SDL_SetSurfaceRLE(surface, if flag then 1 else 0 end)
 
 	fun setTextureAlphaMod(texture: SDLTexture, alpha: U8): I32 =>
 		@SDL_SetTextureAlphaMod(texture, alpha)
@@ -140,13 +143,13 @@ primitive SDL
 	fun setTextureColorMod(texture: SDLTexture, r: U8, g: U8, b: U8) =>
 		@SDL_SetTextureColorMod(texture, r, g, b)
 
-	fun set_WindowFullscreen(window: SDLWindow, flags: SDLFlag) =>
+	fun setWindowFullscreen(window: SDLWindow, flags: SDLFlag) =>
 		@SDL_SetWindowFullscreen(window, flags())
 
-	fun set_WindowPosition(window: SDLWindow, x: I32, y: I32) =>
+	fun setWindowPosition(window: SDLWindow, x: I32, y: I32) =>
 		@SDL_SetWindowPosition(window, x, y)
 
-	fun set_WindowSize(window: SDLWindow, w: I32, h: I32) =>
+	fun setWindowSize(window: SDLWindow, w: I32, h: I32) =>
 		@SDL_SetWindowSize(window, w, h)
 
 	fun showWindow(window: SDLWindow) =>
