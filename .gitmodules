@@ -1,0 +1,3 @@
+[submodule "PDL2"]
+	path = PDL2
+	url = https://github.com/CorbeauBlanc/PDL2.git
