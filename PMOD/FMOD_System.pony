@@ -2,10 +2,13 @@ use "collections"
 
 
 use @FMOD_System_Close[I32](system: FMODSystem)
-use @FMOD_Alt_System_Create[FMODSystem]()
+use @FMOD_System_Create[I32](system: Pointer[FMODSystem])
 use @FMOD_System_Init[I32](system: FMODSystem, maxchannels: I32, flags: U32, extradriverdata: Pointer[U8])
 use @FMOD_System_Release[I32](system: FMODSystem)
 use @FMOD_System_Update[I32](system: FMODSystem)
+
+use @FMOD_System_CreateSound[I32](system: FMODSystem, name_or_data: Pointer[U8] tag, mode: U32, exinfo: Pointer[U8], sound: Pointer[FMODSound])
+use @FMOD_System_PlaySound[I32](system: FMODSystem, sound: FMODSound, channelgroup: FMODChannelGroup, paused: I32, channel: Pointer[FMODChannel])
 
 
 primitive _FMODSystem

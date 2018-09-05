@@ -10,16 +10,12 @@ NAME=$(notdir $(CURDIR))
 
 
 $(NAME):
-	cd $(C_DIR) && $(CC) -c *.c
-	$(PC) $(PFLAGS)
+	$(PC)
 
 all: $(NAME)
 
 $(DBG_FCTS): $(DBG_FCTS:.o=.c)
 	$(CC) -c $^
-
-debug: $(DBG_FCTS)
-	$(PC) --linker="gcc -no-pie debug_fcts.o"
 
 clean:
 	@if [ -e *.o ]; then\
@@ -28,6 +24,5 @@ clean:
 	@if [ -e $(NAME) ]; then\
 		rm $(NAME);\
 	fi
-	rm $(C_DIR)/*.o
 
 re: clean all
