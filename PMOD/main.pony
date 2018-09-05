@@ -50,6 +50,30 @@ primitive FMOD
 		@FMOD_System_PlaySound(system, sound, channelgroup, if paused then 1 else 0 end, addressof channel)
 		channel
 
+	fun systemGetChannel(system: FMODSystem, channelid: I32): FMODChannel ? =>
+		var channel = FMODChannel
+		var res = @FMOD_System_GetChannel(system, channelid, addressof channel)
+		if res != FMODOk() then error end
+		channel
+
+	fun systemGetChannelsPlaying(system: FMODSystem): I32 =>
+		var nb: I32 = 0
+		var res = @FMOD_System_GetChannelsPlaying[I32](system, addressof nb, Pointer[I32])
+		if res != FMODOk() then -1 else nb end
+
+	fun systemGetRealChannelsPlaying(system: FMODSystem): I32 =>
+		var nb: I32 = 0
+		var res = @FMOD_System_GetChannelsPlaying[I32](system, Pointer[I32], addressof nb)
+		if res != FMODOk() then -1 else nb end
+
+	fun systemGetDriver(system: FMODSystem): I32 =>
+		var nb: I32 = 0
+		var res = @FMOD_System_GetDriver(system, addressof nb)
+		if res != FMODOk() then -1 else nb end
+
+	fun systemSetDriver(system: FMODSystem, driver: I32): I32 =>
+		@FMOD_System_SetDriver(system, driver)
+
 	fun soundRelease(sound: FMODSound): I32 =>
 		@FMOD_Sound_Release(sound)
 

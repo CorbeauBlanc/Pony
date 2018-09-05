@@ -7,6 +7,12 @@ use @FMOD_System_Init[I32](system: FMODSystem, maxchannels: I32, flags: U32, ext
 use @FMOD_System_Release[I32](system: FMODSystem)
 use @FMOD_System_Update[I32](system: FMODSystem)
 
+use @FMOD_System_GetDriver[I32](system: FMODSystem, driver: Pointer[I32])
+use @FMOD_System_SetDriver[I32](system: FMODSystem, driver: I32)
+
+use @FMOD_System_GetChannel[I32](system: FMODSystem, channelid: I32, channel: Pointer[FMODChannel])
+use @FMOD_System_GetChannelsPlaying[I32](system: FMODSystem, channels: Pointer[I32], realchannels: Pointer[I32])
+
 use @FMOD_System_CreateSound[I32](system: FMODSystem, name_or_data: Pointer[U8] tag, mode: U32, exinfo: Pointer[U8], sound: Pointer[FMODSound])
 use @FMOD_System_PlaySound[I32](system: FMODSystem, sound: FMODSound, channelgroup: FMODChannelGroup, paused: I32, channel: Pointer[FMODChannel])
 
