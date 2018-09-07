@@ -23,13 +23,13 @@ primitive FMOD
 
 	fun systemCreateSound(system: FMODSystem, name_or_data: String, mode: FMODMod val, exinfo: Pointer[U8]): FMODSound ? =>
 		var sound = FMODSound
-		var res = @FMOD_System_CreateSound(system, name_or_data.cstring(), mode(),Pointer[U8], addressof sound)
+		let res = @FMOD_System_CreateSound(system, name_or_data.cstring(), mode(),Pointer[U8], addressof sound)
 		if res != FMODOk() then error end
 		sound
 
 	fun systemCreate(): FMODSystem ? =>
 		var system: FMODSystem = FMODSystem
-		var res = @FMOD_System_Create(addressof system)
+		let res = @FMOD_System_Create(addressof system)
 		if res != FMODOk() then error end
 		system
 
@@ -52,23 +52,23 @@ primitive FMOD
 
 	fun systemGetChannel(system: FMODSystem, channelid: I32): FMODChannel ? =>
 		var channel = FMODChannel
-		var res = @FMOD_System_GetChannel(system, channelid, addressof channel)
+		let res = @FMOD_System_GetChannel(system, channelid, addressof channel)
 		if res != FMODOk() then error end
 		channel
 
 	fun systemGetChannelsPlaying(system: FMODSystem): I32 =>
 		var nb: I32 = 0
-		var res = @FMOD_System_GetChannelsPlaying[I32](system, addressof nb, Pointer[I32])
+		let res = @FMOD_System_GetChannelsPlaying[I32](system, addressof nb, Pointer[I32])
 		if res != FMODOk() then -1 else nb end
 
 	fun systemGetRealChannelsPlaying(system: FMODSystem): I32 =>
 		var nb: I32 = 0
-		var res = @FMOD_System_GetChannelsPlaying[I32](system, Pointer[I32], addressof nb)
+		let res = @FMOD_System_GetChannelsPlaying[I32](system, Pointer[I32], addressof nb)
 		if res != FMODOk() then -1 else nb end
 
 	fun systemGetDriver(system: FMODSystem): I32 =>
 		var nb: I32 = 0
-		var res = @FMOD_System_GetDriver(system, addressof nb)
+		let res = @FMOD_System_GetDriver(system, addressof nb)
 		if res != FMODOk() then -1 else nb end
 
 	fun systemSetDriver(system: FMODSystem, driver: I32): I32 =>
@@ -76,6 +76,31 @@ primitive FMOD
 
 	fun soundRelease(sound: FMODSound): I32 =>
 		@FMOD_Sound_Release(sound)
+
+	fun soundGetDefaultFrequency(sound: FMODSound): F32 =>
+		var nb: F32 = 0
+		let res = @FMOD_Sound_GetDefaults(sound, addressof nb, Pointer[I32])
+		if res != FMODOk() then -1 else nb end
+
+	fun soundGetDefaultPriority(sound: FMODSound): I32 =>
+		var nb: I32 = 0
+		let res = @FMOD_Sound_GetDefaults(sound, Pointer[F32], addressof nb)
+		if res != FMODOk() then -1 else nb end
+
+	fun soundGetLength(sound: FMODSound, lengthtype: FMODTimeUnit): I32 =>
+		var nb: U32 = 0
+		let res = @FMOD_Sound_GetLength(sound, addressof nb, lengthtype())
+		if res != FMODOk() then -1 else nb.i32() end
+
+	fun soundGetLoopCount(sound: FMODSound): I32 =>
+		var nb: I32 = 0
+		let res = @FMOD_Sound_GetLoopCount[I32](sound, addressof nb)
+		if res != FMODOk() then -1 else nb end
+
+	fun soundGetMusicSpeed(sound: FMODSound): F32 =>
+		var nb: F32 = 0
+		let res = @FMOD_Sound_GetMusicSpeed(sound, addressof nb)
+		if res != FMODOk() then -1 else nb end
 
 
 actor Main

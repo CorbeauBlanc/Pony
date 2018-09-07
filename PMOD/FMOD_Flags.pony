@@ -112,3 +112,28 @@ primitive FMODLOADSECONDARYRAM is FMODMod
 	fun apply(): U32 => 0x20000000
 primitive FMODVIRTUALPLAYFROMSTART is FMODMod
 	fun apply(): U32 => 0x80000000
+
+
+/*
+	Time units flags
+*/
+interface FMODTimeUnit is FMODFlag
+
+primitive FMODTIMEUNITMS is FMODTimeUnit
+	fun apply(): U32 => 0x00000001
+primitive FMODTIMEUNITPCM is FMODTimeUnit
+	fun apply(): U32 => 0x00000002
+primitive FMODTIMEUNITPCMBYTES is FMODTimeUnit
+	fun apply(): U32 => 0x00000004
+primitive FMODTIMEUNITRAWBYTES is FMODTimeUnit
+	fun apply(): U32 => 0x00000008
+primitive FMODTIMEUNITPCMFRACTION is FMODTimeUnit
+	fun apply(): U32 => 0x00000010
+primitive FMODTIMEUNITMODORDER is FMODTimeUnit
+	fun apply(): U32 => 0x00000100
+primitive FMODTIMEUNITMODROW is FMODTimeUnit
+	fun apply(): U32 => 0x00000200
+primitive FMODTIMEUNITMODPATTERN is FMODTimeUnit
+	fun apply(): U32 => 0x00000400
+primitive FMODTIMEUNITBUFFERED is FMODTimeUnit
+	fun apply(): U32 => 0x10000000
