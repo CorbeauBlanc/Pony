@@ -102,6 +102,28 @@ primitive FMOD
 		let res = @FMOD_Sound_GetMusicSpeed(sound, addressof nb)
 		if res != FMODOk() then -1 else nb end
 
+	fun soundGetOpenState(sound: FMODSound): FMODSoundState =>
+		var openstate: U32 = 0
+		var percentbuffered: U32 = 0
+		var starving: I32 = 0
+		var diskbusy: I32 = 0
+		let res = @FMOD_Sound_GetOpenState(sound, addressof openstate, addressof percentbuffered, addressof starving, addressof diskbusy)
+		if res != FMODOk() then
+			FMODSoundState.failed(res)
+		else
+			FMODSoundState(openstate, percentbuffered, starving, diskbusy)
+		end
+
+	fun soundGetSoundGroup(sound: FMODSound): FMODSoundGroup =>
+		var gp = FMODSoundGroup
+		@FMOD_Sound_GetSoundGroup(sound, addressof gp)
+		gp
+
+	fun soundGetTag(sound: FMODSound, name: String, index: I32): FMODTag ? =>
+		var tg: FMODTag ref = FMODTag
+		let res = @FMOD_Sound_GetTag(sound, name.cstring(), index, MaybePointer[FMODTag](tg))
+		if res != FMODOk() then error else tg end
+
 
 actor Main
 	new create(env: Env) =>
