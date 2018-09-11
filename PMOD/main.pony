@@ -97,6 +97,12 @@ primitive FMOD
 		let res = @FMOD_Sound_GetLoopCount[I32](sound, addressof nb)
 		if res != FMODOk() then -1 else nb end
 
+	fun soundGetLoopPoints(sound: FMODSound, loopstarttype: FMODTimeUnit, loopendtype: FMODTimeUnit): (U32, U32) =>
+		var loopstart: U32 = 0
+		var loopend: U32 = 0
+		@FMOD_Sound_GetLoopPoints(sound, addressof loopstart, loopstarttype(), addressof loopend, loopendtype())
+		(loopstart, loopend)
+
 	fun soundGetMusicSpeed(sound: FMODSound): F32 =>
 		var nb: F32 = 0
 		let res = @FMOD_Sound_GetMusicSpeed(sound, addressof nb)
@@ -123,6 +129,21 @@ primitive FMOD
 		var tg: FMODTag ref = FMODTag
 		let res = @FMOD_Sound_GetTag(sound, name.cstring(), index, MaybePointer[FMODTag](tg))
 		if res != FMODOk() then error else tg end
+
+	fun soundSetDefaults(sound: FMODSound, frequency: F32, priority: I32): I32 =>
+		@FMOD_Sound_SetDefaults(sound, frequency, priority)
+
+	fun soundSetLoopCount(sound: FMODSound, loopcount: I32): I32 =>
+		@FMOD_Sound_SetLoopCount(sound, loopcount)
+
+	fun soundSetLoopPoints(sound: FMODSound, loopstart: U32, loopstarttype: FMODTimeUnit, loopend: U32, loopendtype: FMODTimeUnit): I32 =>
+		@FMOD_Sound_SetLoopPoints(sound, loopstart, loopstarttype(), loopend, loopendtype())
+
+	fun soundSetMode(sound: FMODSound, mode: FMODMod): I32 =>
+		@FMOD_Sound_SetMode(sound, mode())
+
+	fun soundSetSoundGroup(sound: FMODSound, soundgroup: FMODSoundGroup): I32 =>
+		@FMOD_Sound_SetSoundGroup(sound, soundgroup)
 
 
 actor Main

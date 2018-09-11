@@ -4,11 +4,16 @@ use @FMOD_Sound_Release[I32](sound: FMODSound)
 use @FMOD_Sound_GetDefaults[I32](sound: FMODSound, frequency: Pointer[F32], priority: Pointer[I32])
 use @FMOD_Sound_GetLength[I32](sound: FMODSound, length: Pointer[U32], lengthtype: U32)
 use @FMOD_Sound_GetLoopCount[I32](sound: FMODSound, loopcount: Pointer[I32])
+use @FMOD_Sound_GetLoopPoints[I32](sound: FMODSound, loopstart: Pointer[U32], loopstarttype: U32, loopend: Pointer[U32], loopendtype: U32)
 use @FMOD_Sound_GetMusicSpeed[I32](sound: FMODSound, speed: Pointer[F32])
 use @FMOD_Sound_GetOpenState[I32](sound: FMODSound, openstate: Pointer[U32], percentbuffered: Pointer[U32], starving: Pointer[I32], diskbusy: Pointer[I32])
 use @FMOD_Sound_GetSoundGroup[I32](sound: FMODSound, soundgroup: Pointer[FMODSoundGroup])
 use @FMOD_Sound_GetTag[I32](sound: FMODSound, name: Pointer[U8] tag, index: I32, tag_: MaybePointer[FMODTag])
-
+use @FMOD_Sound_SetDefaults[I32](sound: FMODSound, frequency: F32, priority: I32)
+use @FMOD_Sound_SetLoopCount[I32](sound: FMODSound, loopcount: I32)
+use @FMOD_Sound_SetLoopPoints[I32](sound: FMODSound, loopstart: U32, loopstarttype: U32, loopend: U32, loopendtype: U32)
+use @FMOD_Sound_SetMode[I32](sound: FMODSound, mode: U32)
+use @FMOD_Sound_SetSoundGroup[I32](sound: FMODSound, soundgroup: FMODSoundGroup)
 
 primitive _FMODSound
 type FMODSound is Pointer[_FMODSound]
