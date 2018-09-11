@@ -51,6 +51,11 @@ primitive FMOD
 		let res = @FMOD_System_GetChannelsPlaying[I32](system, Pointer[I32], addressof nb)
 		if res != FMODOk() then -1 else nb end
 
+	fun systemCreateChannelGroup(system: FMODSystem, name: String): FMODChannelGroup ? =>
+		var cg = FMODChannelGroup
+		let res = @FMOD_System_CreateChannelGroup(system, name.cstring(), addressof cg)
+		if res != FMODOk() then error else cg end
+
 	fun systemGetDriver(system: FMODSystem): I32 =>
 		var nb: I32 = 0
 		let res = @FMOD_System_GetDriver(system, addressof nb)
@@ -266,6 +271,11 @@ primitive FMOD
 	fun channelGroupAddFadePoint(channelGroup: FMODChannelGroup, dspclock: U64, volume: F32): I32 =>
 		@FMOD_ChannelGroup_AddFadePoint(channelGroup, dspclock, volume)
 
+	fun channelGroupGetChannel(channelGroup: FMODChannelGroup, index: I32): FMODChannel ? =>
+		var channel = FMODChannel
+		let res = @FMOD_ChannelGroup_GetChannel(channelGroup, index, addressof channel)
+		if res != FMODOk() then error else channel end
+
 	fun channelGroupGetDSPClock(channelGroup: FMODChannelGroup): (U64, U64) =>
 		var dspclock: U64 = 0
 		var parentclock: U64 = 0
@@ -281,6 +291,11 @@ primitive FMOD
 		var mute: I32 = 0
 		@FMOD_ChannelGroup_GetMute(channelGroup, addressof mute)
 		if mute == 1 then true else false end
+
+	fun channelGroupGetNumChannels(channelGroup: FMODChannelGroup): I32 =>
+		var numchannels: I32 = 0
+		@FMOD_ChannelGroup_GetNumChannels(channelGroup, addressof numchannels)
+		numchannels
 
 	fun channelGroupGetPaused(channelGroup: FMODChannelGroup): Bool =>
 		var paused: I32 = 0
@@ -306,6 +321,9 @@ primitive FMOD
 		var isPlaying: I32 = 0
 		@FMOD_ChannelGroup_IsPlaying(channelGroup, addressof isPlaying)
 		if isPlaying == 1 then true else false end
+
+	fun channelGroupRelease(channelGroup: FMODChannelGroup): I32 =>
+		@FMOD_ChannelGroup_Release(channelGroup)
 
 	fun channelGroupRemoveFadePoints(channelGroup: FMODChannelGroup, dspclock_start: U64, dspclock_end: U64): I32 =>
 		@FMOD_ChannelGroup_RemoveFadePoints(channelGroup, dspclock_start, dspclock_end)

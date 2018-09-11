@@ -13,6 +13,8 @@ use @FMOD_System_SetDriver[I32](system: FMODSystem, driver: I32)
 use @FMOD_System_GetChannel[I32](system: FMODSystem, channelid: I32, channel: Pointer[FMODChannel])
 use @FMOD_System_GetChannelsPlaying[I32](system: FMODSystem, channels: Pointer[I32], realchannels: Pointer[I32])
 
+use @FMOD_System_CreateChannelGroup[I32](system: FMODSystem, name: Pointer[U8] tag, channelgroup: Pointer[FMODChannelGroup])
+
 use @FMOD_System_CreateSound[I32](system: FMODSystem, name_or_data: Pointer[U8] tag, mode: U32, exinfo: Pointer[U8], sound: Pointer[FMODSound])
 use @FMOD_System_PlaySound[I32](system: FMODSystem, sound: FMODSound, channelgroup: FMODChannelGroup, paused: I32, channel: Pointer[FMODChannel])
 
