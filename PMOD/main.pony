@@ -263,6 +263,80 @@ primitive FMOD
 	fun channelStop(channel: FMODChannel): I32 =>
 		@FMOD_Channel_Stop(channel)
 
+	fun channelGroupAddFadePoint(channelGroup: FMODChannelGroup, dspclock: U64, volume: F32): I32 =>
+		@FMOD_ChannelGroup_AddFadePoint(channelGroup, dspclock, volume)
+
+	fun channelGroupGetDSPClock(channelGroup: FMODChannelGroup): (U64, U64) =>
+		var dspclock: U64 = 0
+		var parentclock: U64 = 0
+		@FMOD_ChannelGroup_GetDSPClock(channelGroup, addressof dspclock, addressof parentclock)
+		(dspclock, parentclock)
+
+	fun channelGroupGetMode(channelGroup: FMODChannelGroup): U32 =>
+		var mode: U32 = 0
+		@FMOD_ChannelGroup_GetMode(channelGroup, addressof mode)
+		mode
+
+	fun channelGroupGetMute(channelGroup: FMODChannelGroup): Bool =>
+		var mute: I32 = 0
+		@FMOD_ChannelGroup_GetMute(channelGroup, addressof mute)
+		if mute == 1 then true else false end
+
+	fun channelGroupGetPaused(channelGroup: FMODChannelGroup): Bool =>
+		var paused: I32 = 0
+		@FMOD_ChannelGroup_GetPaused(channelGroup, addressof paused)
+		if paused == 1 then true else false end
+
+	fun channelGroupGetPitch(channelGroup: FMODChannelGroup): F32 =>
+		var pitch: F32 = 0
+		@FMOD_ChannelGroup_GetPitch(channelGroup, addressof pitch)
+		pitch
+
+	fun channelGroupGetVolume(channelGroup: FMODChannelGroup): F32 =>
+		var volume: F32 = 0
+		@FMOD_ChannelGroup_GetVolume(channelGroup, addressof volume)
+		volume
+
+	fun channelGroupGetVolumeRamp(channelGroup: FMODChannelGroup): Bool =>
+		var ramp: I32 = 0
+		@FMOD_ChannelGroup_GetVolumeRamp(channelGroup, addressof ramp)
+		if ramp == 1 then true else false end
+
+	fun channelGroupIsPlaying(channelGroup: FMODChannelGroup): Bool =>
+		var isPlaying: I32 = 0
+		@FMOD_ChannelGroup_IsPlaying(channelGroup, addressof isPlaying)
+		if isPlaying == 1 then true else false end
+
+	fun channelGroupRemoveFadePoints(channelGroup: FMODChannelGroup, dspclock_start: U64, dspclock_end: U64): I32 =>
+		@FMOD_ChannelGroup_RemoveFadePoints(channelGroup, dspclock_start, dspclock_end)
+
+	fun channelGroupSetFadePointRamp(channelGroup: FMODChannelGroup, dspclock: U64, volume: F32): I32 =>
+		@FMOD_ChannelGroup_SetFadePointRamp(channelGroup, dspclock, volume)
+
+	fun channelGroupSetMode(channelGroup: FMODChannelGroup, mode: FMODMod): I32 =>
+		@FMOD_ChannelGroup_SetMode(channelGroup, mode())
+
+	fun channelGroupSetMute(channelGroup: FMODChannelGroup, mute: Bool): I32 =>
+		@FMOD_ChannelGroup_SetMute(channelGroup, if mute then 1 else 0 end)
+
+	fun channelGroupSetPan(channelGroup: FMODChannelGroup, pan: F32): I32 =>
+		@FMOD_ChannelGroup_SetPan(channelGroup, pan)
+
+	fun channelGroupSetPaused(channelGroup: FMODChannelGroup, paused: Bool): I32 =>
+		@FMOD_ChannelGroup_SetPaused(channelGroup, if paused then 1 else 0 end)
+
+	fun channelGroupSetPitch(channelGroup: FMODChannelGroup, pitch: F32): I32 =>
+		@FMOD_ChannelGroup_SetPitch(channelGroup, pitch)
+
+	fun channelGroupSetVolume(channelGroup: FMODChannelGroup, volume: F32): I32 =>
+		@FMOD_ChannelGroup_SetVolume(channelGroup, volume)
+
+	fun channelGroupSetVolumeRamp(channelGroup: FMODChannelGroup, ramp: Bool): I32 =>
+		@FMOD_ChannelGroup_SetVolumeRamp(channelGroup, if ramp then 1 else 0 end)
+
+	fun channelGroupStop(channelGroup: FMODChannelGroup): I32 =>
+		@FMOD_ChannelGroup_Stop(channelGroup)
+
 
 actor Main
 	new create(env: Env) =>
