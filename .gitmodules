@@ -1,3 +1,6 @@
 [submodule "PDL2"]
 	path = PDL2
 	url = https://github.com/CorbeauBlanc/PDL2.git
+[submodule "PMOD"]
+	path = PMOD
+	url = https://github.com/CorbeauBlanc/PMOD.git
