@@ -17,8 +17,10 @@ use @FMOD_Sound_SetSoundGroup[I32](sound: FMODSound, soundgroup: FMODSoundGroup)
 
 primitive _FMODSound
 type FMODSound is Pointer[_FMODSound]
+
 primitive _FMODSoundGroup
 type FMODSoundGroup is Pointer[_FMODSoundGroup]
+
 
 primitive FMODOPENSTATEREADY
 	fun apply(): U32 => 0

@@ -6,21 +6,6 @@ use "lib:fmod"
 
 primitive FMOD
 
-	fun channelGetMute(channel: FMODChannel): Bool =>
-		var mute: I32 = 0
-		@FMOD_Channel_GetMute(channel, addressof mute)
-		if mute == 1 then true else false end
-
-	fun channelGetPaused(channel: FMODChannel): Bool =>
-		var paused: I32 = 0
-		@FMOD_Channel_GetPaused(channel, addressof paused)
-		if paused == 1 then true else false end
-
-	fun channelIsPlaying(channel: FMODChannel): Bool =>
-		var isPlaying: I32 = 0
-		@FMOD_Channel_IsPlaying(channel, addressof isPlaying)
-		if isPlaying == 1 then true else false end
-
 	fun systemCreateSound(system: FMODSystem, name_or_data: String, mode: FMODMod val, exinfo: Pointer[U8]): FMODSound ? =>
 		var sound = FMODSound
 		let res = @FMOD_System_CreateSound(system, name_or_data.cstring(), mode(),Pointer[U8], addressof sound)
@@ -144,6 +129,139 @@ primitive FMOD
 
 	fun soundSetSoundGroup(sound: FMODSound, soundgroup: FMODSoundGroup): I32 =>
 		@FMOD_Sound_SetSoundGroup(sound, soundgroup)
+
+	fun channelAddFadePoint(channel: FMODChannel, dspclock: U64, volume: F32): I32 =>
+		@FMOD_Channel_AddFadePoint(channel, dspclock, volume)
+
+	fun channelGetChannelGroup(channel: FMODChannel): FMODChannelGroup =>
+		var cg = FMODChannelGroup
+		@FMOD_Channel_GetChannelGroup(channel, addressof cg)
+		cg
+
+	fun channelGetCurrentSound(channel: FMODChannel): FMODSound =>
+		var sound = FMODSound
+		@FMOD_Channel_GetCurrentSound(channel, addressof sound)
+		sound
+
+	fun channelGetDSPClock(channel: FMODChannel): (U64, U64) =>
+		var dspclock: U64 = 0
+		var parentclock: U64 = 0
+		@FMOD_Channel_GetDSPClock(channel, addressof dspclock, addressof parentclock)
+		(dspclock, parentclock)
+
+	fun channelGetFrequency(channel: FMODChannel): F32 =>
+		var frequency: F32 = 0
+		@FMOD_Channel_GetFrequency(channel, addressof frequency)
+		frequency
+
+	fun channelGetIndex(channel: FMODChannel): I32 =>
+		var i: I32 = -1
+		@FMOD_Channel_GetIndex(channel, addressof i)
+		i
+
+	fun channelGetLoopCount(channel: FMODChannel): I32 =>
+		var loopcount: I32 = -1
+		@FMOD_Channel_GetLoopCount(channel, addressof loopcount)
+		loopcount
+
+	fun channelGetLoopPoints(channel: FMODChannel, loopstarttype: FMODTimeUnit, loopendtype: FMODTimeUnit): (U32, U32) =>
+		var loopstart: U32 = 0
+		var loopend: U32 = 0
+		@FMOD_Channel_GetLoopPoints(channel, addressof loopstart, loopstarttype(), addressof loopend, loopendtype())
+		(loopstart, loopend)
+
+	fun channelGetMode(channel: FMODChannel): U32 =>
+		var mode: U32 = 0
+		@FMOD_Channel_GetMode(channel, addressof mode)
+		mode
+
+	fun channelGetMute(channel: FMODChannel): Bool =>
+		var mute: I32 = 0
+		@FMOD_Channel_GetMute(channel, addressof mute)
+		if mute == 1 then true else false end
+
+	fun channelGetPaused(channel: FMODChannel): Bool =>
+		var paused: I32 = 0
+		@FMOD_Channel_GetPaused(channel, addressof paused)
+		if paused == 1 then true else false end
+
+	fun channelGetPitch(channel: FMODChannel): F32 =>
+		var pitch: F32 = 0
+		@FMOD_Channel_GetPitch(channel, addressof pitch)
+		pitch
+
+	fun channelGetPosition(channel: FMODChannel, postype: FMODTimeUnit): U32 =>
+		var position: U32 = 0
+		@FMOD_Channel_GetPosition(channel, addressof position, postype())
+		position
+
+	fun channelGetPriority(channel: FMODChannel): I32 =>
+		var priority: I32 = -1
+		@FMOD_Channel_GetPriority(channel, addressof priority)
+		priority
+
+	fun channelGetVolume(channel: FMODChannel): F32 =>
+		var volume: F32 = 0
+		@FMOD_Channel_GetVolume(channel, addressof volume)
+		volume
+
+	fun channelGetVolumeRamp(channel: FMODChannel): Bool =>
+		var ramp: I32 = 0
+		@FMOD_Channel_GetVolumeRamp(channel, addressof ramp)
+		if ramp == 1 then true else false end
+
+	fun channelIsPlaying(channel: FMODChannel): Bool =>
+		var isPlaying: I32 = 0
+		@FMOD_Channel_IsPlaying(channel, addressof isPlaying)
+		if isPlaying == 1 then true else false end
+
+	fun channelRemoveFadePoints(channel: FMODChannel, dspclock_start: U64, dspclock_end: U64): I32 =>
+		@FMOD_Channel_RemoveFadePoints(channel, dspclock_start, dspclock_end)
+
+	fun channelSetChannelGroup(channel: FMODChannel, channelgroup: FMODChannelGroup): I32 =>
+		@FMOD_Channel_SetChannelGroup(channel, channelgroup)
+
+	fun channelSetFadePointRamp(channel: FMODChannel, dspclock: U64, volume: F32): I32 =>
+		@FMOD_Channel_SetFadePointRamp(channel, dspclock, volume)
+
+	fun channelSetFrequency(channel: FMODChannel, frequency: F32): I32 =>
+		@FMOD_Channel_SetFrequency(channel, frequency)
+
+	fun channelSetLoopCount(channel: FMODChannel, loopcount: I32): I32 =>
+		@FMOD_Channel_SetLoopCount(channel, loopcount)
+
+	fun channelSetLoopPoints(channel: FMODChannel, loopstart: U32, loopstarttype: FMODTimeUnit, loopend: U32, loopendtype: FMODTimeUnit): I32 =>
+		@FMOD_Channel_SetLoopPoints(channel, loopstart, loopstarttype(), loopend, loopendtype())
+
+	fun channelSetMode(channel: FMODChannel, mode: FMODMod): I32 =>
+		@FMOD_Channel_SetMode(channel, mode())
+
+	fun channelSetMute(channel: FMODChannel, mute: Bool): I32 =>
+		@FMOD_Channel_SetMute(channel, if mute then 1 else 0 end)
+
+	fun channelSetPan(channel: FMODChannel, pan: F32): I32 =>
+		@FMOD_Channel_SetPan(channel, pan)
+
+	fun channelSetPaused(channel: FMODChannel, paused: Bool): I32 =>
+		@FMOD_Channel_SetPaused(channel, if paused then 1 else 0 end)
+
+	fun channelSetPitch(channel: FMODChannel, pitch: F32): I32 =>
+		@FMOD_Channel_SetPitch(channel, pitch)
+
+	fun channelSetPosition(channel: FMODChannel, position: U32, postype: FMODTimeUnit): I32 =>
+		@FMOD_Channel_SetPosition(channel, position, postype())
+
+	fun channelSetPriority(channel: FMODChannel, priority: I32): I32 =>
+		@FMOD_Channel_SetPriority(channel, priority)
+
+	fun channelSetVolume(channel: FMODChannel, volume: F32): I32 =>
+		@FMOD_Channel_SetVolume(channel, volume)
+
+	fun channelSetVolumeRamp(channel: FMODChannel, ramp: Bool): I32 =>
+		@FMOD_Channel_SetVolumeRamp(channel, if ramp then 1 else 0 end)
+
+	fun channelStop(channel: FMODChannel): I32 =>
+		@FMOD_Channel_Stop(channel)
 
 
 actor Main
